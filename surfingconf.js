@@ -1,3 +1,3 @@
 /* Begin configuration */
 
-settings.scroolStepSize = 90;
+settings.scroolStepSize = 100;
