@@ -1,1 +1,3 @@
-/* Hello world */
+/* Begin configuration */
+
+settings.scroolStepSize = 90;
