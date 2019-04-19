@@ -1,4 +1,3 @@
-alert("test");
 /* Begin configuration */
 
 settings.scrollStepSize = 100;
