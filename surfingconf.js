@@ -1,6 +1,6 @@
 /* Begin configuration */
 
-settings.scroolStepSize = 100;
+settings.scroolStepSize = 110;
 settings.showProxyInStatusBar = true;
 settings.showModeStatus = true;
 settings.focusOnSaved = false;
