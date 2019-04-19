@@ -1,7 +1,7 @@
 /* Begin configuration */
 
 settings.scrollStepSize = 100;
-settings.scrollFriction = 20;
+settings.scrollFriction = 100;
 settings.showProxyInStatusBar = true;
 settings.showModeStatus = true;
 settings.focusOnSaved = false;
