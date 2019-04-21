@@ -50,4 +50,6 @@ settings.theme = `
 
 /* Proxy settings */
 
-map('e', ':feedkeys j', 0, "test");
+mapkey('e', 'Test', () => {
+    Normal.feedkeys('10j');
+});
