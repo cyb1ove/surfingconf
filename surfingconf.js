@@ -47,3 +47,7 @@ settings.theme = `
 #sk_status, #sk_find {
     font-size: 20pt;
 }`;
+
+/* Proxy settings */
+
+map('e', ':feedkeys jk', 0, "test");
