@@ -51,12 +51,16 @@ settings.theme = `
 /* Unmap keys */
 
 unmap('sm');
-
-/* Mode switch */
-
+unmap('spa');
+unmap('spb');
+unmap('spc');
+unmap('spd');
+unmap('sps');
+unmap('spi');
 
 /* Proxy settings */
 
-mapkey('e', 'Test', () => {
-    Normal.feedkeys('10j');
+mapkey('spa', '#16Set Australian proxy', () => {
+    Normal.feedkeys('setProxyMode always');
+    Normal.feedkeys('setProxy au.proxy.competera.net:3128');
 });
