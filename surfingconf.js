@@ -63,5 +63,5 @@ unmap('spi');
 mapkey('spa', '#16Set Australian proxy', () => {
     Normal.feedkeys('setProxyMode always');
     Normal.feedkeys('setProxy au.proxy.competera.net:3128');
-    Front.showPopup('Australian proxy');
+    Front.showBanner('Australian proxy');
 });
