@@ -60,8 +60,20 @@ unmap('spi');
 
 /* Proxy settings */
 
-mapkey('spa', '#16Set Australian proxy', () => {
-    map('sppa', ':setProxy au.proxy.competera.net:3128', 0, "");
-    Normal.feedkeys('sppa');
-    Front.showBanner('Australian proxy');
-});
+map('spau', ':setProxy au.proxy.competera.net:3128', 0, "");
+map('spde', ':setProxy de.proxy.competera.net:3128', 0, "");
+map('spdk', ':setProxy 217.61.239.52:3128', 0, "");
+map('spes', ':setProxy es.proxy.competera.net:3128', 0, "");
+map('spfi', ':setProxy fi.proxy.competera.net:3128', 0, "");
+map('spfr', ':setProxy fr.proxy.competera.net:3128', 0, "");
+map('spie', ':setProxy ie.proxy.competera.net:3128', 0, "");
+map('spin', ':setProxy in.proxy.competera.net:3128', 0, "");
+map('spit', ':setProxy it.proxy.competera.net:3128', 0, "");
+map('spnl', ':setProxy nl.proxy.competera.net:3128', 0, "");
+map('spno', ':setProxy no.proxy.competera.net:3128', 0, "");
+map('sppt', ':setProxy pt.proxy.competera.net:3128', 0, "");
+map('spru', ':setProxy ru.proxy.competera.net:3128', 0, "");
+map('spse', ':setProxy se.proxy.competera.net:3128', 0, "");
+map('spuk', ':setProxy uk.proxy.competera.net:3128', 0, "");
+map('spus', ':setProxy us.proxy.competera.net:3128', 0, "");
+map('spua', ':setProxy 192.168.0.1', 0, "");
