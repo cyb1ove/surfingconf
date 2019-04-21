@@ -48,6 +48,13 @@ settings.theme = `
     font-size: 20pt;
 }`;
 
+/* Unmap keys */
+
+unmap('sm');
+
+/* Mode switch */
+
+
 /* Proxy settings */
 
 mapkey('e', 'Test', () => {
