@@ -61,7 +61,9 @@ unmap('spi');
 /* Proxy settings */
 
 mapkey('spa', '#16Set Australian proxy', () => {
-    Normal.feedkeys(':');
-    //Normal.feedkeys(':setProxy au.proxy.competera.net:3128');
+    map('spma', ':setProxyMode always', 0, "");
+    map('sppa', ':setProxy au.proxy.competera.net:3128');
+    Normal.feedkeys('spma');
+    Normal.feedkeys('sppa');
     Front.showBanner('Australian proxy');
 });
