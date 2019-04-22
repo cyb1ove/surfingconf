@@ -59,8 +59,37 @@ unmap('sps');
 unmap('spi');
 
 /* Proxy settings */
+var proxy_keys = [
+    ["au", "Australian"],
+    ["de", "Germany"],
+    ["dk", "Denmark"],
+    ["es", "Spain"],
+    ["fr", "France"],
+    ["ie", "Ireland"],
+    ["in", "India"],
+    ["it", "Italy"],
+    ["nl", "Netherlands"],
+    ["pt", "Portuguese"],
+    ["ru", "Rusia"],
+    ["se", "Sweden"],
+    ["uk", "British"],
+    ["us", "USA"],
+    ["ua", "Ukraine"]
+];
 
-mapkey('spau', '#16Set australian proxy', () => {
-    Front.executeCommand("setProxy au.proxy.competera.net:3128");
-    setTimeout(() => Front.executeCommand("setProxyMode always"), 10);
+function set_proxy(code, country) {
+    mapkey('sp' + code, '#16Set ' + country + ' proxy', () => {
+        if (country == "Ukraine") {
+            Front.executeCommand("setProxyMode clear");
+        } else {
+            Front.executeCommand("setProxyMode always");
+            setTimeout(() => Front.executeCommand("setProxy " + code + " .proxy.competera.net:3128"));
+        }
+    });
+}
+
+proxy_keys.forEach((el) => {
+    set_proxy.apply(this, el)
 });
+
+
