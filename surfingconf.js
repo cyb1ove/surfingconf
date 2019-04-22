@@ -61,6 +61,6 @@ unmap('spi');
 /* Proxy settings */
 
 mapkey('spau', '#16Set australian proxy', () => {
+    Front.executeCommand("setProxy au.proxy.competera.net:3128");
     Front.executeCommand("setProxyMode always");
-    //Front.executeCommand("setProxy au.proxy.competera.net:3128");
 });
