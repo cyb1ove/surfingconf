@@ -83,7 +83,7 @@ function set_proxy(code, country) {
             Front.executeCommand("setProxyMode clear");
         } else {
             Front.executeCommand("setProxyMode always");
-            setTimeout(() => Front.executeCommand("setProxy " + code + " .proxy.competera.net:3128"));
+            setTimeout(() => Front.executeCommand("setProxy " + code + ".proxy.competera.net:3128"));
         }
     });
 }
