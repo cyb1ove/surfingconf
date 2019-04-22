@@ -76,4 +76,4 @@ map('spru', ':setProxy ru.proxy.competera.net:3128', 0, "");
 map('spse', ':setProxy se.proxy.competera.net:3128', 0, "");
 map('spuk', ':setProxy uk.proxy.competera.net:3128', 0, "");
 map('spus', ':setProxy us.proxy.competera.net:3128', 0, "");
-map('spua', ':setProxy 192.168.0.1', 0, "");
+map('spua', ':setProxy 192.168.0.1:80', 0, "");
