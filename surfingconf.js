@@ -60,30 +60,19 @@ unmap('spi');
 
 /* Proxy settings */
 var proxy_keys = [
-    ["au", "Australian"],
-    ["de", "Germany"],
-    ["dk", "Denmark"],
-    ["es", "Spain"],
-    ["fr", "France"],
-    ["ie", "Ireland"],
-    ["in", "India"],
-    ["it", "Italy"],
-    ["nl", "Netherlands"],
-    ["pt", "Portuguese"],
-    ["ru", "Rusia"],
-    ["se", "Sweden"],
-    ["uk", "British"],
-    ["us", "USA"],
+    ["ru", "Rusia", "62.173.145.48"],
+    ["uk", "British", "195.22.121.13:443"],
+    ["us", "USA", "50.196.205.141:54034"],
     ["ua", "Ukraine"]
 ];
 
-function set_proxy(code, country) {
+function set_proxy(code, country, ip) {
     mapkey('sp' + code, '#16Set ' + country + ' proxy', () => {
         if (country == "Ukraine") {
             Front.executeCommand("setProxyMode clear");
         } else {
             Front.executeCommand("setProxyMode always");
-            setTimeout(() => Front.executeCommand("setProxy " + code + ".proxy.competera.net:3128"), 10);
+            setTimeout(() => Front.executeCommand("setProxy " + ip), 10);
         }
     });
 }
