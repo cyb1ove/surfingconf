@@ -81,4 +81,31 @@ proxy_keys.forEach((el) => {
     set_proxy.apply(this, el)
 });
 
+/* Copy mappings */
+
+unmap('yQ');
+unmap('ya');
+unmap('yc');
+unmap('yd');
+unmap('yf');
+unmap('yh');
+unmap('yi');
+unmap('yj');
+unmap('yl');
+unmap('ymv');
+unmap('ymc');
+unmap('yma');
+unmap('yp');
+unmap('yq');
+unmap('yj');
+unmap('yv');
+unmap('yy');
+
+function clipboard(input, mode = "write") {
+    if (mode === "add") {
+        Clipboard.read((response) => Clipboard.write(response + "/n" + input))
+    } else {
+        Clipboard.write(input)
+    }
+}
 
