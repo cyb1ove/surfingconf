@@ -109,7 +109,6 @@ function clipboard(input, mode = "write") {
     }
 }
 
-function test_clipboard() {
-    clipboard("fdf", "add");
-}
+mapkey('d', 'test', clipboard("dfdfs", "add"));
+
 
