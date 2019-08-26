@@ -103,9 +103,13 @@ unmap('yy');
 
 function clipboard(input, mode = "write") {
     if (mode === "add") {
-        Clipboard.read((response) => Clipboard.write(response + "/n" + input))
+        Clipboard.read((response) => Clipboard.write(response + "/n" + input));
     } else {
-        Clipboard.write(input)
+        Clipboard.write(input);
     }
+}
+
+function test_clipboard() {
+    clipboard("fdf", "add");
 }
 
