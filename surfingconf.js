@@ -59,7 +59,7 @@ unmap('sps');
 unmap('spi');
 
 /* Proxy settings */
-var proxy_keys = [
+const proxy_keys = [
     ["ru", "Rusia", "62.173.145.48"],
     ["uk", "British", "195.22.121.13:443"],
     ["us", "USA", "50.196.205.141:54034"],
@@ -101,12 +101,19 @@ unmap('yj');
 unmap('yv');
 unmap('yy');
 
+mapkey("<Alt-z>", "fsdfsf", () => alert("fsdf"));
+
+const clip_modes = [
+    []
+]
+
 function clipboard(input, mode = "write") {
     if (mode === "add") {
         Clipboard.read((response) => Clipboard.write(response.data + "\n" + input));
-    } else {
+    } else if (mode === "write" {
         Clipboard.write(input);
     }
 }
+
 
 
