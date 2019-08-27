@@ -103,12 +103,10 @@ unmap('yy');
 
 function clipboard(input, mode = "write") {
     if (mode === "add") {
-        Clipboard.read((response) => Clipboard.write(response + "/n" + input));
+        Clipboard.read((response) => Clipboard.write(response.data + "\n" + input));
     } else {
         Clipboard.write(input);
     }
 }
-
-mapkey('d', 'test', clipboard("dfdfs", "add"));
 
 
