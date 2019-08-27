@@ -110,7 +110,7 @@ const clip_modes = [
 function clipboard(input, mode = "write") {
     if (mode === "add") {
         Clipboard.read((response) => Clipboard.write(response.data + "\n" + input));
-    } else if (mode === "write" {
+    } else if (mode === "write") {
         Clipboard.write(input);
     }
 }
