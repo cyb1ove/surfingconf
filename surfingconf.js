@@ -68,7 +68,7 @@ const proxy_keys = [
 
 function set_proxy(code, country, ip) {
     mapkey('sp' + code, '#16Set ' + country + ' proxy', () => {
-        if (country == "Ukraine") {
+        if (country === "Ukraine") {
             Front.executeCommand("setProxyMode clear");
         } else {
             Front.executeCommand("setProxyMode always");
@@ -115,19 +115,20 @@ function clipboard(input, mode = "copy") {
 }
 
 function setClipboardMapkeys(key, mode) {
-    mapkey(`${key}a`, `#7${mode} a link URL to the clipboard`, function() {
+    var mode_in_string = mode.charAt(0).toUpperCase();
+    mapkey(`${key}a`, `#7${mode_in_string} a link URL to the clipboard`, function() {
         Hints.create('*[href]', function(element) {
             clipboard(element.href, mode);
         });
     });
-    mapkey(`${key}ma`, `#7${mode} multiple link URLs to the clipboard`, function() {
+    mapkey(`${key}ma`, `#7${mode_in_string} multiple link URLs to the clipboard`, function() {
         var linksToYank = [];
         Hints.create('*[href]', function(element) {
             linksToYank.push(element.href);
             clipboard(linksToYank.join('\n'), mode);
         }, {multipleHits: true});
     });
-    mapkey(`${key}c`, `#7${mode} a column of a table`, function() {
+    mapkey(`${key}c`, `#7${mode_in_string} a column of a table`, function() {
         Hints.create(getTableColumnHeads(), function(element) {
             var column = Array.from(element.closest("table").querySelectorAll("tr")).map(function(tr) {
                 return tr.children.length > element.cellIndex ? tr.children[element.cellIndex].innerText : "";
@@ -135,7 +136,7 @@ function setClipboardMapkeys(key, mode) {
             clipboard(column.join("\n"), mode);
         });
     });
-    mapkey(`${key}mc`, `#7${mode} multiple columns of a table`, function() {
+    mapkey(`${key}mc`, `#7${mode_in_string} multiple columns of a table`, function() {
         var rows = null;
         Hints.create(getTableColumnHeads(), function(element) {
             var column = Array.from(element.closest("table").querySelectorAll("tr")).map(function(tr) {
@@ -151,17 +152,17 @@ function setClipboardMapkeys(key, mode) {
             clipboard(rows.join("\n"), mode);
         }, {multipleHits: true});
     });
-    mapkey(`${key}q`, `#7${mode} pre text`, function() {
+    mapkey(`${key}q`, `#7${mode_in_string} pre text`, function() {
         Hints.create("pre", function(element) {
             clipboard(element.innerText, mode);
         });
     });
-    mapkey(`${key}i`, `#7${mode} text of an input`, function() {
+    mapkey(`${key}i`, `#7${mode_in_string} text of an input`, function() {
         Hints.create("input, textarea, select", function(element) {
             clipboard(element.value, mode);
         });
     });
-    mapkey(`${key}j`, `#7${mode} current settings`, function() {
+    mapkey(`${key}j`, `#7${mode_in_string} current settings`, function() {
         runtime.command({
             action: 'getSettings',
             key: "RAW"
@@ -169,7 +170,7 @@ function setClipboardMapkeys(key, mode) {
             clipboard(JSON.stringify(response.settings, null, 4), mode);
         });
     });
-    mapkey(`${key}d`, `#7${mode} current downloading URL`, function() {
+    mapkey(`${key}d`, `#7${mode_in_string} current downloading URL`, function() {
         runtime.command({
             action: 'getDownloads',
             query: {state: "in_progress"}
@@ -180,17 +181,17 @@ function setClipboardMapkeys(key, mode) {
             clipboard(items.join(','), mode);
         });
     });
-    mapkey(`${key}y`, `#7${mode} current page's URL`, function() {
+    mapkey(`${key}y`, `#7${mode_in_string} current page's URL`, function() {
         clipboard(window.location.href, mode);
     });
-    mapkey(`${key}h`, `#7${mode} current page's host`, function() {
+    mapkey(`${key}h`, `#7${mode_in_string} current page's host`, function() {
         var url = new URL(window.location.href);
         clipboard(url.host, mode);
     });
-    mapkey(`${key}l`, `#7${mode} current page's title`, function() {
+    mapkey(`${key}l`, `#7${mode_in_string} current page's title`, function() {
         clipboard(document.title, mode);
     });
-    mapkey(`${key}Q`, `#7${mode} all query history of OmniQuery.`, function() {
+    mapkey(`${key}Q`, `#7${mode_in_string} all query history of OmniQuery.`, function() {
         runtime.command({
             action: 'getSettings',
             key: 'OmniQueryHistory'
@@ -198,14 +199,14 @@ function setClipboardMapkeys(key, mode) {
             clipboard(response.settings.OmniQueryHistory.join("\n"), mode);
         });
     });
-    mapkey(`${key}f`, `#7${mode} form data in JSON on current page`, function() {
+    mapkey(`${key}f`, `#7${mode_in_string} form data in JSON on current page`, function() {
         var fd = {};
         document.querySelectorAll('form').forEach(function(form) {
             fd[generateFormKey(form)] = getFormData(form, "json");
         });
         clipboard(JSON.stringify(fd, null, 4), mode);
     });
-    mapkey(`${key}p`, `#7${mode} form data for POST on current page`, function() {
+    mapkey(`${key}p`, `#7${mode_in_string} form data for POST on current page`, function() {
         var aa = [];
         document.querySelectorAll('form').forEach(function(form) {
             var fd = {};
