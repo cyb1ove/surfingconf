@@ -120,6 +120,100 @@ function setClipboardMapkeys(key, mode) {
             clipboard(element.href, mode);
         });
     });
+    mapkey(`${key}ma`, `#7${mode} multiple link URLs to the clipboard`, function() {
+        var linksToYank = [];
+        Hints.create('*[href]', function(element) {
+            linksToYank.push(element.href);
+            clipboard(linksToYank.join('\n'), mode);
+        }, {multipleHits: true});
+    });
+    mapkey(`${key}c`, `#7${mode} a column of a table`, function() {
+        Hints.create(getTableColumnHeads(), function(element) {
+            var column = Array.from(element.closest("table").querySelectorAll("tr")).map(function(tr) {
+                return tr.children.length > element.cellIndex ? tr.children[element.cellIndex].innerText : "";
+            });
+            clipboard(column.join("\n"), mode);
+        });
+    });
+    mapkey(`${key}mc`, `#7${mode} multiple columns of a table`, function() {
+        var rows = null;
+        Hints.create(getTableColumnHeads(), function(element) {
+            var column = Array.from(element.closest("table").querySelectorAll("tr")).map(function(tr) {
+                return tr.children.length > element.cellIndex ? tr.children[element.cellIndex].innerText : "";
+            });
+            if (!rows) {
+                rows = column;
+            } else {
+                column.forEach(function(c, i) {
+                    rows[i] += "\t" + c;
+                });
+            }
+            clipboard(rows.join("\n"), mode);
+        }, {multipleHits: true});
+    });
+    mapkey(`${key}q`, `#7${mode} pre text`, function() {
+        Hints.create("pre", function(element) {
+            clipboard(element.innerText, mode);
+        });
+    });
+    mapkey(`${key}i`, `#7${mode} text of an input`, function() {
+        Hints.create("input, textarea, select", function(element) {
+            clipboard(element.value, mode);
+        });
+    });
+    mapkey(`${key}j`, `#7${mode} current settings`, function() {
+        runtime.command({
+            action: 'getSettings',
+            key: "RAW"
+        }, function(response) {
+            clipboard(JSON.stringify(response.settings, null, 4), mode);
+        });
+    });
+    mapkey(`${key}d`, `#7${mode} current downloading URL`, function() {
+        runtime.command({
+            action: 'getDownloads',
+            query: {state: "in_progress"}
+        }, function(response) {
+            var items = response.downloads.map(function(o) {
+                return o.url;
+            });
+            clipboard(items.join(','), mode);
+        });
+    });
+    mapkey(`${key}y`, `#7${mode} current page's URL`, function() {
+        clipboard(window.location.href, mode);
+    });
+    mapkey(`${key}h`, `#7${mode} current page's host`, function() {
+        var url = new URL(window.location.href);
+        clipboard(url.host, mode);
+    });
+    mapkey(`${key}l`, `#7${mode} current page's title`, function() {
+        clipboard(document.title, mode);
+    });
+    mapkey(`${key}Q`, `#7${mode} all query history of OmniQuery.`, function() {
+        runtime.command({
+            action: 'getSettings',
+            key: 'OmniQueryHistory'
+        }, function(response) {
+            clipboard(response.settings.OmniQueryHistory.join("\n"), mode);
+        });
+    });
+    mapkey(`${key}f`, `#7${mode} form data in JSON on current page`, function() {
+        var fd = {};
+        document.querySelectorAll('form').forEach(function(form) {
+            fd[generateFormKey(form)] = getFormData(form, "json");
+        });
+        clipboard(JSON.stringify(fd, null, 4), mode);
+    });
+    mapkey(`${key}p`, `#7${mode} form data for POST on current page`, function() {
+        var aa = [];
+        document.querySelectorAll('form').forEach(function(form) {
+            var fd = {};
+            fd[(form.method || "get") + "::" + form.action] = getFormData(form);
+            aa.push(fd);
+        });
+        clipboard(JSON.stringify(aa, null, 4), mode);
+    });
 }
 
 clip_modes.forEach((el) => {
