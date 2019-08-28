@@ -102,20 +102,20 @@ unmap('yv');
 unmap('yy');
 
 const clip_modes = [
-    ["y", "write"],
+    ["y", "copy"],
     ["<Alt-y>", "add"]
-]
+];
 
-function clipboard(input, mode = "write") {
+function clipboard(input, mode = "copy") {
     if (mode === "add") {
         Clipboard.read((response) => Clipboard.write(response.data + "\n" + input));
-    } else if (mode === "write") {
+    } else if (mode === "copy") {
         Clipboard.write(input);
     }
 }
 
 function setClipboardMapkeys(key, mode) {
-    mapkey(key + 'a', '#7Copy a link URL to the clipboard', function() {
+    mapkey(`${key}a`, `#7${mode} a link URL to the clipboard`, function() {
         Hints.create('*[href]', function(element) {
             clipboard(element.href, mode);
         });
@@ -124,6 +124,5 @@ function setClipboardMapkeys(key, mode) {
 
 clip_modes.forEach((el) => {
     setClipboardMapkeys.apply(this, el)
-})
-
+});
 
