@@ -58,6 +58,11 @@ unmap('spd');
 unmap('sps');
 unmap('spi');
 
+/* Remap keys */
+
+map('J', 'j');
+map('K', 'k');
+
 /* Proxy settings */
 const proxy_keys = [
     ["ru", "Rusia", "62.173.145.48"],
