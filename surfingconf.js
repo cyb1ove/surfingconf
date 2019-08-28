@@ -101,7 +101,7 @@ unmap('yj');
 unmap('yv');
 unmap('yy');
 
-mapkey("<Alt-z>", "fsdfsf", () => alert("fsdf"));
+mapkey("<Alt-z>k", "fsdfsf", () => alert("fsdf"));
 
 const clip_modes = [
     []
