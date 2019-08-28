@@ -101,10 +101,9 @@ unmap('yj');
 unmap('yv');
 unmap('yy');
 
-mapkey("<Alt-z>k", "fsdfsf", () => alert("fsdf"));
-
 const clip_modes = [
-    []
+    ["y", "write"],
+    ["<Alt-y>", "add"]
 ]
 
 function clipboard(input, mode = "write") {
@@ -115,5 +114,16 @@ function clipboard(input, mode = "write") {
     }
 }
 
+function setClipboardMapkeys(key, mode) {
+    mapkey( '${key}a', '#7Copy a link URL to the clipboard', function() {
+        Hints.create('*[href]', function(element) {
+            clipboard(element.href, mode);
+        });
+    });
+}
+
+clip_modes.forEach((el) => {
+    setClipboardMapkeys.apply(this, el)
+})
 
 
