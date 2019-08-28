@@ -115,7 +115,7 @@ function clipboard(input, mode = "write") {
 }
 
 function setClipboardMapkeys(key, mode) {
-    mapkey( '${key}a', '#7Copy a link URL to the clipboard', function() {
+    mapkey(key + 'a', '#7Copy a link URL to the clipboard', function() {
         Hints.create('*[href]', function(element) {
             clipboard(element.href, mode);
         });
