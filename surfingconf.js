@@ -86,28 +86,16 @@ unmap('j');
 map('K', 'k');
 unmap('k');
 
-/* Proxy settings */
-const proxy_keys = [
-    ["ru", "Rusia", "62.173.145.48"],
-    ["uk", "British", "195.22.121.13:443"],
-    ["us", "USA", "50.196.205.141:54034"],
-    ["ua", "Ukraine"]
-];
-
-function set_proxy(code, country, ip) {
-    mapkey('sp' + code, '#16Set ' + country + ' proxy', () => {
-        if (country === "Ukraine") {
-            Front.executeCommand("setProxyMode clear");
-        } else {
-            Front.executeCommand("setProxyMode always");
-            setTimeout(() => Front.executeCommand("setProxy " + ip), 10);
-        }
-    });
+function cartesianProduct(arr)
+{
+    return arr.reduce(function(a,b){
+        return a.map(function(x){
+            return b.map(function(y){
+                return x.concat(y);
+            })
+        }).reduce(function(a,b){ return a.concat(b) },[])
+    }, [[]])
 }
-
-proxy_keys.forEach((el) => {
-    set_proxy.apply(this, el)
-});
 
 /* Tab opening modes */
 
@@ -124,6 +112,12 @@ const parse_modes = [
 ];
 
 /* Follow links */
+
+function setFollowMapkeys(tab_mode, parse_mode) {
+    mapkey(`${tab_mode}f${parse_mode}`)
+}
+
+
 
 /* Copy mappings */
 
