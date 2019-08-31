@@ -57,11 +57,34 @@ unmap('spc');
 unmap('spd');
 unmap('sps');
 unmap('spi');
+unmap('yQ');
+unmap('ya');
+unmap('yc');
+unmap('yd');
+unmap('yf');
+unmap('yh');
+unmap('yi');
+unmap('yj');
+unmap('yl');
+unmap('ymv');
+unmap('ymc');
+unmap('yma');
+unmap('yp');
+unmap('yq');
+unmap('yj');
+unmap('yv');
+unmap('yy');
+unmap('af');
+unmap('gf');
+unmap('cf');
+unmap('f');
 
 /* Remap keys */
 
 map('J', 'j');
+unmap('j');
 map('K', 'k');
+unmap('k');
 
 /* Proxy settings */
 const proxy_keys = [
@@ -86,25 +109,23 @@ proxy_keys.forEach((el) => {
     set_proxy.apply(this, el)
 });
 
-/* Copy mappings */
+/* Tab opening modes */
 
-unmap('yQ');
-unmap('ya');
-unmap('yc');
-unmap('yd');
-unmap('yf');
-unmap('yh');
-unmap('yi');
-unmap('yj');
-unmap('yl');
-unmap('ymv');
-unmap('ymc');
-unmap('yma');
-unmap('yp');
-unmap('yq');
-unmap('yj');
-unmap('yv');
-unmap('yy');
+const tab_modes = [
+    ["j", {tabbed: true}],
+    ["k", {tabbed: true, active: false}],
+    ["l", {multipleHits: true}]
+];
+
+/* Parse links modes */
+
+const parse_modes = [
+    ["f", ""]
+];
+
+/* Follow links */
+
+/* Copy mappings */
 
 const clip_modes = [
     ["y", "copy"],
