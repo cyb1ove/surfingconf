@@ -86,6 +86,9 @@ unmap('j');
 map('K', 'k');
 unmap('k');
 
+
+
+/*
 function cartesianProduct(arr)
 {
     return arr.reduce(function(a,b){
@@ -97,7 +100,7 @@ function cartesianProduct(arr)
     }, [[]])
 }
 
-/* Tab opening modes */
+/!* Tab opening modes *!/
 
 const tab_modes = [
     ["j", {tabbed: true}],
@@ -105,13 +108,13 @@ const tab_modes = [
     ["l", {multipleHits: true}]
 ];
 
-/* Parse links modes */
+/!* Parse links modes *!/
 
 const parse_modes = [
     ["f", ""]
 ];
 
-/* Follow links */
+/!* Follow links *!/
 
 function setFollowMapkeys(tab_mode, parse_mode) {
     mapkey(`${tab_mode}f${parse_mode}`)
@@ -119,7 +122,7 @@ function setFollowMapkeys(tab_mode, parse_mode) {
 
 
 
-/* Copy mappings */
+/!* Copy mappings *!/
 
 const clip_modes = [
     ["y", "copy"],
@@ -240,4 +243,9 @@ function setClipboardMapkeys(key, mode) {
 clip_modes.forEach((el) => {
     setClipboardMapkeys.apply(this, el)
 });
+*/
+
+Clipboard.prototype.add = function(text) {
+    this.read((response) => this.write(response.data + "\n" + input));
+}
 
