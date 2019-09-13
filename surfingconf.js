@@ -248,5 +248,3 @@ clip_modes.forEach((el) => {
 Clipboard.prototype.add = function(input) {
     this.read((response) => this.write(response.data + "\n" + input));
 };
-
-Clipboard.add("fsdf");
