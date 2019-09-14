@@ -79,12 +79,12 @@ unmap('gf');
 unmap('cf');
 
 /* Remap keys */
-
+/*
 map('J', 'j');
 unmap('j');
 map('K', 'k');
 unmap('k');
-
+*/
 
 
 /*
