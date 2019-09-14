@@ -77,7 +77,6 @@ unmap('yy');
 unmap('af');
 unmap('gf');
 unmap('cf');
-unmap('f');
 
 /* Remap keys */
 
