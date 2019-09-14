@@ -245,8 +245,6 @@ clip_modes.forEach((el) => {
 });
 */
 
-/*
-Clipboard.prototype.add = function(input) {
+Clipboard.add = function(input) {
     this.read((response) => this.write(response.data + "\n" + input));
 };
-*/
