@@ -257,4 +257,4 @@ function MapkeyTemplate() {
 const multiple_snippet = {
 }
 
-mapkey('aa', '#15gsjldfj', () => (alert("gdg")));
+mapkey('aa', '#16gsjldfj', () => (alert("gdg")));
