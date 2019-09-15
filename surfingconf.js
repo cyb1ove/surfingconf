@@ -249,3 +249,12 @@ clip_modes.forEach((el) => {
 Clipboard.add = function(input) {
     this.read((response) => this.write(response.data + "\n" + input));
 };
+
+function MapkeyTemplate() {
+
+}
+
+const multiple_snippet = {
+}
+
+mapkey('aa', '#15gsjldfj', () => (alert("gdg")));
