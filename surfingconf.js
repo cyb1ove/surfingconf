@@ -50,6 +50,7 @@ settings.theme = `
 
 /* Unmap keys */
 
+/*
 unmap('sm');
 unmap('spa');
 unmap('spb');
@@ -77,6 +78,7 @@ unmap('yy');
 unmap('af');
 unmap('gf');
 unmap('cf');
+*/
 
 /* Remap keys */
 /*
