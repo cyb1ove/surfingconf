@@ -1,3 +1,5 @@
+"use strict"
+
 /* Begin configuration */
 
 settings.scrollStepSize = 150;
@@ -250,11 +252,10 @@ Clipboard.add = function(input) {
     this.read((response) => this.write(response.data + "\n" + input));
 };
 
-function MapkeyTemplate() {
+/* объявляем переменные через let внутри блоков */
+/*
+  Функции лучше объявлять через выражения
+  var test = function() {
 
-}
-
-const multiple_snippet = {
-}
-
-mapkey('aa', '#16gsjldfj', () => (alert("gdg")));
+  }
+*/
