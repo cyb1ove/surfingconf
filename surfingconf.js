@@ -109,9 +109,6 @@ mapkey('yS', '#8Copy statistics', function() {
     names.forEach((name) => {
         statistic.push({marketer: name, Zgoda: 0, Pozniej: 0, Pomy: 0, Odmowa: 0, exists: false})
     })
-    
-    $.ajax({ url: "http://marketell.pl/marketell3/marketell/projects/customers/id/" +
-                                            document.location.href.split('/').slice(-1)[0], success: function(data) { alert(data); } });
     /*var count_phone_numbers = document_url("http://marketell.pl/marketell3/marketell/projects/customers/id/" +
                                             document.location.href.split('/').slice(-1)[0])*/
     document.getElementsByClassName("items table table-striped table-condensed")[0].querySelectorAll('tbody > tr').forEach((call) => {
