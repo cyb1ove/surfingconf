@@ -1,261 +1,178 @@
-"use strict"
-
-/* Begin configuration */
-
-settings.scrollStepSize = 150;
-settings.scrollFriction = 10;
-settings.showProxyInStatusBar = true;
+settings.enableAutoFocus = true;
+settings.stealFocusOnLoad = false;
 settings.showModeStatus = true;
-settings.focusOnSaved = false;
-settings.omnibarPosition = "bottom";
-settings.omnibarSuggestion = "true";
+settings.omnibarSuggestion = true;
+settings.scrollStepSize = 100;
 
-/* Theme setting */
+unmap("t");
+unmap("F");
+unmap("B");
+unmap("gu");
+unmap("gU");
+unmap("S");
+unmap("D");
+unmap("<Ctrl-6>");
+unmap("gt");
+unmap("zi");
+unmap("zo");
+unmap("<CapsLock>");
+unmap("p");
+unmap("<Alt-p>");
+unmap("yf");
+unmap("ys");
 
-settings.theme = `
-.sk_theme {
-    font-family: Input Sans Condensed, Charcoal, sans-serif;
-    font-size: 10pt;
-    background: #24272e;
-    color: #abb2bf;
-}
-.sk_theme tbody {
-    color: #fff;
-}
-.sk_theme input {
-    color: #d0d0d0;
-}
-.sk_theme .url {
-    color: #61afef;
-}
-.sk_theme .annotation {
-    color: #56b6c2;
-}
-.sk_theme .omnibar_highlight {
-    color: #528bff;
-}
-.sk_theme .omnibar_timestamp {
-    color: #e5c07b;
-}
-.sk_theme .omnibar_visitcount {
-    color: #98c379;
-}
-.sk_theme #sk_omnibarSearchResult>ul>li:nth-child(odd) {
-    background: #303030;
-}
-.sk_theme #sk_omnibarSearchResult>ul>li.focused {
-    background: #3e4452;
-}
-#sk_status, #sk_find {
-    font-size: 20pt;
-}`;
-
-/* Unmap keys */
-
-/*
-unmap('sm');
-unmap('spa');
-unmap('spb');
-unmap('spc');
-unmap('spd');
-unmap('sps');
-unmap('spi');
-unmap('yQ');
-unmap('ya');
-unmap('yc');
-unmap('yd');
-unmap('yf');
-unmap('yh');
-unmap('yi');
-unmap('yj');
-unmap('yl');
-unmap('ymv');
-unmap('ymc');
-unmap('yma');
-unmap('yp');
-unmap('yq');
-unmap('yj');
-unmap('yv');
-unmap('yy');
-unmap('af');
-unmap('gf');
-unmap('cf');
-*/
-
-/* Remap keys */
-/*
-map('J', 'j');
-unmap('j');
-map('K', 'k');
-unmap('k');
-*/
-
-
-/*
-function cartesianProduct(arr)
-{
-    return arr.reduce(function(a,b){
-        return a.map(function(x){
-            return b.map(function(y){
-                return x.concat(y);
-            })
-        }).reduce(function(a,b){ return a.concat(b) },[])
-    }, [[]])
-}
-
-/!* Tab opening modes *!/
-
-const tab_modes = [
-    ["j", {tabbed: true}],
-    ["k", {tabbed: true, active: false}],
-    ["l", {multipleHits: true}]
-];
-
-/!* Parse links modes *!/
-
-const parse_modes = [
-    ["f", ""]
-];
-
-/!* Follow links *!/
-
-function setFollowMapkeys(tab_mode, parse_mode) {
-    mapkey(`${tab_mode}f${parse_mode}`)
-}
-
-
-
-/!* Copy mappings *!/
-
-const clip_modes = [
-    ["y", "copy"],
-    ["<Alt-y>", "add"]
-];
-
-function clipboard(input, mode = "copy") {
-    if (mode === "add") {
-        Clipboard.read((response) => Clipboard.write(response.data + "\n" + input));
-    } else if (mode === "copy") {
-        Clipboard.write(input);
-    }
-}
-
-function setClipboardMapkeys(key, mode) {
-    var mode_in_string = mode.charAt(0).toUpperCase() + mode.slice(1);
-    mapkey(`${key}a`, `#7${mode_in_string} a link URL to the clipboard`, function() {
-        Hints.create('*[href]', function(element) {
-            clipboard(element.href, mode);
-        });
-    });
-    mapkey(`${key}ma`, `#7${mode_in_string} multiple link URLs to the clipboard`, function() {
-        var linksToYank = [];
-        Hints.create('*[href]', function(element) {
-            linksToYank.push(element.href);
-            clipboard(linksToYank.join('\n'), mode);
-        }, {multipleHits: true});
-    });
-    mapkey(`${key}c`, `#7${mode_in_string} a column of a table`, function() {
-        Hints.create(getTableColumnHeads(), function(element) {
-            var column = Array.from(element.closest("table").querySelectorAll("tr")).map(function(tr) {
-                return tr.children.length > element.cellIndex ? tr.children[element.cellIndex].innerText : "";
-            });
-            clipboard(column.join("\n"), mode);
-        });
-    });
-    mapkey(`${key}mc`, `#7${mode_in_string} multiple columns of a table`, function() {
-        var rows = null;
-        Hints.create(getTableColumnHeads(), function(element) {
-            var column = Array.from(element.closest("table").querySelectorAll("tr")).map(function(tr) {
-                return tr.children.length > element.cellIndex ? tr.children[element.cellIndex].innerText : "";
-            });
-            if (!rows) {
-                rows = column;
-            } else {
-                column.forEach(function(c, i) {
-                    rows[i] += "\t" + c;
-                });
-            }
-            clipboard(rows.join("\n"), mode);
-        }, {multipleHits: true});
-    });
-    mapkey(`${key}q`, `#7${mode_in_string} pre text`, function() {
-        Hints.create("pre", function(element) {
-            clipboard(element.innerText, mode);
-        });
-    });
-    mapkey(`${key}i`, `#7${mode_in_string} text of an input`, function() {
-        Hints.create("input, textarea, select", function(element) {
-            clipboard(element.value, mode);
-        });
-    });
-    mapkey(`${key}j`, `#7${mode_in_string} current settings`, function() {
-        runtime.command({
-            action: 'getSettings',
-            key: "RAW"
-        }, function(response) {
-            clipboard(JSON.stringify(response.settings, null, 4), mode);
-        });
-    });
-    mapkey(`${key}d`, `#7${mode_in_string} current downloading URL`, function() {
-        runtime.command({
-            action: 'getDownloads',
-            query: {state: "in_progress"}
-        }, function(response) {
-            var items = response.downloads.map(function(o) {
-                return o.url;
-            });
-            clipboard(items.join(','), mode);
-        });
-    });
-    mapkey(`${key}y`, `#7${mode_in_string} current page's URL`, function() {
-        clipboard(window.location.href, mode);
-    });
-    mapkey(`${key}h`, `#7${mode_in_string} current page's host`, function() {
-        var url = new URL(window.location.href);
-        clipboard(url.host, mode);
-    });
-    mapkey(`${key}l`, `#7${mode_in_string} current page's title`, function() {
-        clipboard(document.title, mode);
-    });
-    mapkey(`${key}Q`, `#7${mode_in_string} all query history of OmniQuery.`, function() {
-        runtime.command({
-            action: 'getSettings',
-            key: 'OmniQueryHistory'
-        }, function(response) {
-            clipboard(response.settings.OmniQueryHistory.join("\n"), mode);
-        });
-    });
-    mapkey(`${key}f`, `#7${mode_in_string} form data in JSON on current page`, function() {
-        var fd = {};
-        document.querySelectorAll('form').forEach(function(form) {
-            fd[generateFormKey(form)] = getFormData(form, "json");
-        });
-        clipboard(JSON.stringify(fd, null, 4), mode);
-    });
-    mapkey(`${key}p`, `#7${mode_in_string} form data for POST on current page`, function() {
-        var aa = [];
-        document.querySelectorAll('form').forEach(function(form) {
-            var fd = {};
-            fd[(form.method || "get") + "::" + form.action] = getFormData(form);
-            aa.push(fd);
-        });
-        clipboard(JSON.stringify(aa, null, 4), mode);
-    });
-}
-
-clip_modes.forEach((el) => {
-    setClipboardMapkeys.apply(this, el)
+mapkey("t", '#3Choose a tab', function() {
+    Front.chooseTab();
 });
-*/
+mapkey('T', '#4Go to last used tab', function() {
+    RUNTIME("goToLastTab");
+});
+mapkey('oo', '#8Open a URL', function() {
+    Front.openOmnibar({type: "URLs", extra: "getAllSites"});
+});
+mapkey('<Alt-h>', '#4Go up one path in the URL', function() {
+    var pathname = location.pathname;
+    if (pathname.length > 1) {
+        pathname = pathname.endsWith('/') ? pathname.substr(0, pathname.length - 1) : pathname;
+        var last = pathname.lastIndexOf('/'), repeats = RUNTIME.repeats;
+        RUNTIME.repeats = 1;
+        while (repeats-- > 1) {
+            var p = pathname.lastIndexOf('/', last - 1);
+            if (p === -1) {
+                break;
+            } else {
+                last = p;
+            }
+        }
+        pathname = pathname.substr(0, last);
+    }
+    window.location.href = location.origin + pathname;
+});
+mapkey('<Alt-H>', '#4Go to root of current URL hierarchy', function() {
+    window.location.href = window.location.origin;
+});
+mapkey('zj', '#3zoom in', function() {
+    RUNTIME('setZoom', {
+        zoomFactor: 0.1
+    });
+});
+mapkey('zk', '#3zoom out', function() {
+    RUNTIME('setZoom', {
+        zoomFactor: -0.1
+    });
+});
+mapkey('yC', '#8Copy contract information from CRM', function() {
+    const allow_call_time = [{region: ['Адыг', 'Даг', 'Ингуш', 'Кабар', 'Калмык',
+                                       'Крым', 'Карач', "Карел", "Ком", "Мар",
+                                       "Морд", "Осе", "Татар", "Чечен", "Чуваш",
+                                       "Краснод", "Ставр", "Архан", "Астрах", "Белго", 
+                                       "Брян", "Влад", "Волг", "Волог", "Ворон", 
+                                       "Иван", "Калуж", "Киров", "Костр", "Курс", "Ленин",
+                                       "Липец", "Моск", "Мурм", "Нижег", "Новго",
+                                       "Орл", "Пенз", "Пск", "Рост", "Ряз", "Сарат",
+                                       "Смол", "Тамб", "Твер", "Туль", "Ульян",
+                                       "Ярос", "Ненец"], call_time_begin: 7, call_time_end: 20},
+                             {region: ['Самар', "Удму"], call_time_begin: 6, call_time_end: 19},
+                             {region: ["Башк", "Перм", "Кург", "Орен", "Сверд",
+                                       "Тюмен", "Челяб", "Хант", "Ямал"], call_time_begin: 5, call_time_end: 18},
+                             {region: ["Алт", "Новос", "Омс", "Томс"], call_time_begin: 4, call_time_end: 17},
+                             {region: ["Тыва", "Хак", "Красноя", "Кемер"], call_time_begin: 3, call_time_end: 16},
+                             {region: ["Бурят", "Забай", "Ирк"], call_time_begin: 2, call_time_end: 15},
+                             {region: ["Саха", "Амур"], call_time_begin: 1, call_time_end: 14},
+                             {region: ['Прим', "Хабар", "Магад", "Сахал", "Еврей"], call_time_begin: 0, call_time_end: 13},
+                             {region: ["Камч", "Чукот"], сall_time_begin: 22, call_time_end: 11}];
+    const region_design = ['респ', 'обл', 'кра'];
+                             
+    var table_left = document.getElementById('w1').getElementsByTagName('tbody')[0];
+    var table_right = document.getElementById('w2').getElementsByTagName('tbody')[0];
+    var number = document.getElementById('section-title');
+    
+    Clipboard.write(table_right.getElementsByTagName('tr')[0].getElementsByTagName('td')[0].innerHTML + ";" 
+                  + table_right.getElementsByTagName('tr')[1].getElementsByTagName('td')[0].innerHTML + " " 
+                  + table_right.getElementsByTagName('tr')[2].getElementsByTagName('td')[0].innerHTML + ";" 
+                  + number.textContent.replace(/\((.*?)\)|\s/g, "") + ";"
+                  + table_left.getElementsByTagName('tr')[5].getElementsByTagName('td')[0].innerHTML + ";"
+                  + table_right.getElementsByTagName('tr')[10].getElementsByTagName('td')[0].innerHTML)
+})
+mapkey('yP', '#8Copy marketer calls information', function() {
+    Hints.create('div[id="call-history-grid"] > table > tbody > tr',  function(call) {
+        let marketer = call.querySelectorAll('td')[3].textContent;
+        let comment = call.querySelectorAll('td')[14].textContent;
+        Clipboard.write(marketer + "-" + comment);
+    })
+})
+mapkey('yS', '#8Copy statistics', function() {
+    const names = ['Гаврилова Мария', 'Филиппова Наталья', 'Трохименко Людмила', 'Лысенко Карина', 
+                   'Наталия Бардык', 'Бардык Наталия', 'Ковезина', 'Шустрова', 'Федорченко Николай', 
+                   'Третяк_1L Ирина', 'Третяк_2L Ирина', 'Руденко', 'Харьковская'];
+    var statistic = [];
+    names.forEach((name) => {
+        statistic.push({marketer: name, Zgoda: 0, Pozniej: 0, Pomy: 0, Odmowa: 0, exists: false})
+    })
+    
+    $.ajax({ url: "http://marketell.pl/marketell3/marketell/projects/customers/id/" +
+                                            document.location.href.split('/').slice(-1)[0], success: function(data) { alert(data); } });
+    /*var count_phone_numbers = document_url("http://marketell.pl/marketell3/marketell/projects/customers/id/" +
+                                            document.location.href.split('/').slice(-1)[0])*/
+    document.getElementsByClassName("items table table-striped table-condensed")[0].querySelectorAll('tbody > tr').forEach((call) => {
+        var marketer = call.getElementsByTagName('td')[3].textContent;
+        var result = call.getElementsByTagName('td')[5].textContent;
+        var comment = call.getElementsByTagName('td')[14].textContent;
+        statistic.forEach((marketer_stat, i, arr) => {
+            if (marketer.includes(marketer_stat.marketer)) {
+                Object.keys(marketer_stat).forEach((result_stat) => {
+                    if (result.includes(result_stat)) {
+                        marketer_stat[result_stat]++;
+                        marketer_stat['exists'] = true;
+                    }
+                })
+            }
+        })
+    }); 
 
-Clipboard.add = function(input) {
-    this.read((response) => this.write(response.data + "\n" + input));
-};
+    var statistic_table = function() {
+        let table = "";
+        statistic.forEach((marketer_stat) => {
+            let total = marketer_stat['Zgoda'] + marketer_stat['Pomy'] + marketer_stat['Pozniej'] + marketer_stat['Odmowa']
+            if (marketer_stat['exists'] == true) {
+                table += (marketer_stat['marketer'] != 0 ? marketer_stat['marketer'] : 0) + "\t" +
+                         (marketer_stat['Zgoda'] != 0 ? marketer_stat['Zgoda'] : 0) + "\t" +
+                         (marketer_stat['Pomy'] != 0 ? marketer_stat['Pomyleka'] : 0) + "\t" +
+                         (marketer_stat['Pozniej'] != 0 ? marketer_stat['Pozniej'] : 0) + "\t" +
+                         (marketer_stat['Odmowa'] != 0 ? marketer_stat['Odmowa'] : 0) + "\t" + total + "\n";
+            }
+        })
+        return table;
+    }
+    
+    /*function makeHttpObject() {
+        try {return new XMLHttpRequest();}
+        catch (error) {}
+        try {return new ActiveXObject("Msxml2.XMLHTTP");}
+        catch (error) {}
+        try {return new ActiveXObject("Microsoft.XMLHTTP");}
+        catch (error) {}
 
-/* объявляем переменные через let внутри блоков */
-/*
-  Функции лучше объявлять через выражения
-  var test = function() {
+        throw new Error("Could not create HTTP request object.");
+    }
+var request = makeHttpObject();
+request.open("GET", "http://marketell.pl/marketell3/marketell/projects/view/id/1573", true);
+request.send(null);
+request.onreadystatechange = function() {
+  if (request.readyState == 4)
+    alert(document);
+};*/
 
-  }
-*/
+    Clipboard.write(statistic_table())
+});
+
+mapkey('Fc', '#8Open all contracts', function() {
+    document.getElementsByClassName('table table-hover table-striped table-condensed table-bordered table-small kv-grid-table kv-table-wrap')[0].querySelectorAll('tbody > tr').forEach((contract) => {
+        contracts_url = document.location.host + contract.querySelector('td[data-col-seq="0"] a').getAttribute('href');
+        tabOpenLink(contracts_url);
+    })
+})
+
+map('J', 'd');
+map('K', 'e');
+
