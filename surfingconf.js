@@ -3,6 +3,7 @@ settings.stealFocusOnLoad = false;
 settings.showModeStatus = true;
 settings.omnibarSuggestion = true;
 settings.scrollStepSize = 100;
+Hints.characters = "qwertyuiopasdfghjklzxcvbnm"
 
 unmap("t");
 unmap("F");
@@ -20,6 +21,9 @@ unmap("p");
 unmap("<Alt-p>");
 unmap("yf");
 unmap("ys");
+unmap("y1");
+unmap("y2");
+unmap("f");
 
 mapkey("t", '#3Choose a tab', function() {
     Front.chooseTab();
@@ -61,38 +65,31 @@ mapkey('zk', '#3zoom out', function() {
         zoomFactor: -0.1
     });
 });
-mapkey('yC', '#8Copy contract information from CRM', function() {
-    const allow_call_time = [{region: ['Адыг', 'Даг', 'Ингуш', 'Кабар', 'Калмык',
-                                       'Крым', 'Карач', "Карел", "Ком", "Мар",
-                                       "Морд", "Осе", "Татар", "Чечен", "Чуваш",
-                                       "Краснод", "Ставр", "Архан", "Астрах", "Белго", 
-                                       "Брян", "Влад", "Волг", "Волог", "Ворон", 
-                                       "Иван", "Калуж", "Киров", "Костр", "Курс", "Ленин",
-                                       "Липец", "Моск", "Мурм", "Нижег", "Новго",
-                                       "Орл", "Пенз", "Пск", "Рост", "Ряз", "Сарат",
-                                       "Смол", "Тамб", "Твер", "Туль", "Ульян",
-                                       "Ярос", "Ненец"], call_time_begin: 7, call_time_end: 20},
-                             {region: ['Самар', "Удму"], call_time_begin: 6, call_time_end: 19},
-                             {region: ["Башк", "Перм", "Кург", "Орен", "Сверд",
-                                       "Тюмен", "Челяб", "Хант", "Ямал"], call_time_begin: 5, call_time_end: 18},
-                             {region: ["Алт", "Новос", "Омс", "Томс"], call_time_begin: 4, call_time_end: 17},
-                             {region: ["Тыва", "Хак", "Красноя", "Кемер"], call_time_begin: 3, call_time_end: 16},
-                             {region: ["Бурят", "Забай", "Ирк"], call_time_begin: 2, call_time_end: 15},
-                             {region: ["Саха", "Амур"], call_time_begin: 1, call_time_end: 14},
-                             {region: ['Прим', "Хабар", "Магад", "Сахал", "Еврей"], call_time_begin: 0, call_time_end: 13},
-                             {region: ["Камч", "Чукот"], сall_time_begin: 22, call_time_end: 11}];
-    const region_design = ['респ', 'обл', 'кра'];
-                             
+mapkey('yk', '#8Copy contract information from CRM', function() {
     var table_left = document.getElementById('w1').getElementsByTagName('tbody')[0];
     var table_right = document.getElementById('w2').getElementsByTagName('tbody')[0];
     var number = document.getElementById('section-title');
+    var phone =  table_right.getElementsByTagName('tr')[10].getElementsByTagName('td')[0].innerHTML.split(",")[0]
     
     Clipboard.write(table_right.getElementsByTagName('tr')[0].getElementsByTagName('td')[0].innerHTML + ";" 
                   + table_right.getElementsByTagName('tr')[1].getElementsByTagName('td')[0].innerHTML + " " 
                   + table_right.getElementsByTagName('tr')[2].getElementsByTagName('td')[0].innerHTML + ";" 
                   + number.textContent.replace(/\((.*?)\)|\s/g, "") + ";"
                   + table_left.getElementsByTagName('tr')[5].getElementsByTagName('td')[0].innerHTML + ";"
-                  + table_right.getElementsByTagName('tr')[10].getElementsByTagName('td')[0].innerHTML)
+                  + phone)
+})
+mapkey('yj', '#8Copy contract information from CRM', function() {
+    var table_left = document.getElementById('w1').getElementsByTagName('tbody')[0];
+    var table_right = document.getElementById('w2').getElementsByTagName('tbody')[0];
+    var number = document.getElementById('section-title');
+    var phone =  table_right.getElementsByTagName('tr')[11].getElementsByTagName('td')[0].innerHTML.split(",")[0]
+    
+    Clipboard.write(table_right.getElementsByTagName('tr')[0].getElementsByTagName('td')[0].innerHTML + ";" 
+                  + table_right.getElementsByTagName('tr')[1].getElementsByTagName('td')[0].innerHTML + " " 
+                  + table_right.getElementsByTagName('tr')[2].getElementsByTagName('td')[0].innerHTML + ";" 
+                  + number.textContent.replace(/\((.*?)\)|\s/g, "") + ";"
+                  + table_left.getElementsByTagName('tr')[5].getElementsByTagName('td')[0].innerHTML + ";"
+                  + phone)
 })
 mapkey('yP', '#8Copy marketer calls information', function() {
     Hints.create('div[id="call-history-grid"] > table > tbody > tr',  function(call) {
@@ -163,11 +160,15 @@ request.onreadystatechange = function() {
     Clipboard.write(statistic_table())
 });
 
-mapkey('Fc', '#8Open all contracts', function() {
+mapkey('fC', '#8Open all contracts', function() {
     document.getElementsByClassName('table table-hover table-striped table-condensed table-bordered table-small kv-grid-table kv-table-wrap')[0].querySelectorAll('tbody > tr').forEach((contract) => {
         contracts_url = document.location.host + contract.querySelector('td[data-col-seq="0"] a').getAttribute('href');
         tabOpenLink(contracts_url);
     })
+})
+mapkey('fc', 'Open contract', function() {
+    Hints.create("table.kv-table-wrap > tbody > tr > td > a[class = 'no-pjax']",
+                   Hints.dispatchMouseClick, {})
 })
 
 map('J', 'd');
