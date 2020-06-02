@@ -3,7 +3,7 @@ settings.stealFocusOnLoad = false;
 settings.showModeStatus = true;
 settings.omnibarSuggestion = true;
 settings.scrollStepSize = 100;
-Hints.characters = "qwertyuiopasdfghjklzxcvbnm"
+Hints.characters = "qwertyuiopasdfgzxcvbnm"
 
 unmap("t");
 unmap("F");
@@ -19,7 +19,31 @@ unmap("zo");
 unmap("<CapsLock>");
 unmap("p");
 unmap("<Alt-p>");
+unmap("x");
+unmap("gxt");
+unmap("gxT");
+unmap("gx0");
+unmap("gx$");
+unmap("gxx");
 
+mapkey('X', '#3Close current tab', function() {
+    RUNTIME("closeTab");
+});
+mapkey('xh', '#3Close tab on left', function() {
+    RUNTIME("closeTabLeft");
+});
+mapkey('xl', '#3Close tab on right', function() {
+    RUNTIME("closeTabRight");
+});
+mapkey('xH', '#3Close all tabs on left', function() {
+    RUNTIME("closeTabsToLeft");
+})
+mapkey('xL', '#3Close all tabs on right', function() {
+    RUNTIME("closeTabsToRight");
+});
+mapkey('xx', '#3Close all tabs except current one', function() {
+    RUNTIME("tabOnly");
+});
 mapkey("t", '#3Choose a tab', function() {
     Front.chooseTab();
 });
