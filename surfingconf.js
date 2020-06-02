@@ -19,9 +19,6 @@ unmap("zo");
 unmap("<CapsLock>");
 unmap("p");
 unmap("<Alt-p>");
-unmap("yf");
-unmap("ys");
-unmap("ya");
 
 mapkey("t", '#3Choose a tab', function() {
     Front.chooseTab();
@@ -63,6 +60,8 @@ mapkey('zk', '#3zoom out', function() {
         zoomFactor: -0.1
     });
 });
+
+/*
 mapkey('yk', '#8Copy contract information from CRM', function() {
                              
     var table_left = document.getElementById('w1').getElementsByTagName('tbody')[0];
@@ -208,7 +207,7 @@ mapkey('Fc', '#8Open all contracts', function() {
     /*document.getElementsByClassName('table table-hover table-striped table-condensed table-bordered table-small kv-grid-table kv-table-wrap')[0].querySelectorAll('tbody > tr').forEach((contract) => {
         contracts_url = document.location.host + contract.querySelector('td[data-col-seq="0"] a').getAttribute('href');
         tabOpenLink(contracts_url);
-    })*/
+    })
     document.getElementsByClassName('v-datatable v-table theme--light')[0].querySelectorAll('tbody > tr').forEach((contract) => {
         contracts_url = contract.querySelector('span a').getAttribute('href');
         tabOpenLink(contracts_url);
@@ -233,6 +232,7 @@ mapkey('yaT', '#8Add total contracts', function() {
     })
     Clipboard.write(total)
 })
+*/
 map('J', 'd');
 map('K', 'e');
 
