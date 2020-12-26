@@ -1,262 +1,132 @@
-settings.enableAutoFocus = true;
-settings.stealFocusOnLoad = false;
+Hints.characters = "asdfghlqwertyuopzxcvbnm";
+Hints.scrollKeys = "jk";
 settings.showModeStatus = true;
-settings.omnibarSuggestion = true;
-settings.scrollStepSize = 100;
-Hints.characters = "qwertyuiopasdfgzxcvbnm"
+settings.scrollStepSize = 200;
+settings.focusOnSaved = false;
 
-unmap("t");
-unmap("F");
-unmap("B");
-unmap("gu");
-unmap("gU");
-unmap("S");
-unmap("D");
-unmap("<Ctrl-6>");
-unmap("gt");
-unmap("zi");
-unmap("zo");
-unmap("<CapsLock>");
-unmap("p");
-unmap("<Alt-p>");
-unmap("x");
-unmap("gxt");
-unmap("gxT");
-unmap("gx0");
-unmap("gx$");
-unmap("gxx");
+unmap('h');
+unmap('l');
+unmap('f');
+unmap('r');
+unmap('i');
+unmap('I');
+unmap('d');
+unmap('q');
 
-mapkey('X', '#3Close current tab', function() {
-    RUNTIME("closeTab");
-});
-mapkey('xh', '#3Close tab on left', function() {
-    RUNTIME("closeTabLeft");
-});
-mapkey('xl', '#3Close tab on right', function() {
-    RUNTIME("closeTabRight");
-});
-mapkey('xH', '#3Close all tabs on left', function() {
-    RUNTIME("closeTabsToLeft");
+mapkey('<Space>', '', () => {
+    document.querySelector("button[ng-click*='togglePlay']").click();
 })
-mapkey('xL', '#3Close all tabs on right', function() {
-    RUNTIME("closeTabsToRight");
-});
-mapkey('xx', '#3Close all tabs except current one', function() {
-    RUNTIME("tabOnly");
-});
-mapkey("t", '#3Choose a tab', function() {
-    Front.chooseTab();
-});
-mapkey('T', '#4Go to last used tab', function() {
-    RUNTIME("goToLastTab");
-});
-mapkey('oo', '#8Open a URL', function() {
-    Front.openOmnibar({type: "URLs", extra: "getAllSites"});
-});
-mapkey('<Alt-h>', '#4Go up one path in the URL', function() {
-    var pathname = location.pathname;
-    if (pathname.length > 1) {
-        pathname = pathname.endsWith('/') ? pathname.substr(0, pathname.length - 1) : pathname;
-        var last = pathname.lastIndexOf('/'), repeats = RUNTIME.repeats;
-        RUNTIME.repeats = 1;
-        while (repeats-- > 1) {
-            var p = pathname.lastIndexOf('/', last - 1);
-            if (p === -1) {
-                break;
-            } else {
-                last = p;
-            }
-        }
-        pathname = pathname.substr(0, last);
+mapkey('<Alt-h>', '', () => {
+    document.querySelector("button[ng-click*='backward(5)']").click();
+})
+mapkey('<Alt-l>', '', () => {
+    document.querySelector("button[ng-click*='forward(5)']").click();
+})
+mapkey('<Alt-H>', '', () => {
+    document.querySelector("button[ng-click*='backward(30)']").click();
+})
+mapkey('<Alt-L>', '', () => {
+    document.querySelector("button[ng-click*='forward(30)']").click();
+})
+mapkey('<Alt-y>', '', () => {
+    document.querySelector("button[ng-click='speedPlay(1)']").click();
+})
+mapkey('<Alt-u>', '', () => {
+    document.querySelector("button[ng-click='speedPlay(1.5, $event)']").click();
+})
+mapkey('<Alt-i>', '', () => {
+    document.querySelector("button[ng-click='speedPlay(2, $event)']").click();
+})
+mapkey('<Alt-o>', '', () => {
+    document.querySelector("button[ng-click='speedPlay(4, $event)']").click();
+})
+mapkey('<Alt-p>', '', () => {
+    document.querySelector("button[ng-click='speedPlay(6, $event)']").click();
+})
+
+mapkey('a', '', () => {
+    document.querySelector("button[ng-click*='addDynamicPeToTask']").click();
+})
+mapkey('f', '', () => {
+    Hints.create("tbody[ng-click*='openDynamicCheck']", Hints.dispatchMouseClick, {mouseEvents: ["click"]});
+})
+mapkey('m', '', () => {
+    Hints.create("#mics-switcher a", Hints.dispatchMouseClick);
+})
+mapkey('u', "", () => {
+    Hints.create("video", (el) => {
+        let clickEvent = document.createEvent('MouseEvents');
+        clickEvent.initEvent('dblclick', false, false);
+        el.dispatchEvent(clickEvent);
+    })
+})
+mapkey('i', "", () => {
+    if (document.querySelector(".dynamic-checks-div.ng-hide")) {
+        Hints.create("#answer-details-editor textarea", Hints.dispatchMouseClick);
+    } else {
+        Hints.create("input[ng-click*='setChildAnswer']", 
+                  Hints.dispatchMouseClick, {multipleHits: true});
     }
-    window.location.href = location.origin + pathname;
-});
-mapkey('<Alt-H>', '#4Go to root of current URL hierarchy', function() {
-    window.location.href = window.location.origin;
-});
-mapkey('zj', '#3zoom in', function() {
-    RUNTIME('setZoom', {
-        zoomFactor: 0.1
-    });
-});
-mapkey('zk', '#3zoom out', function() {
-    RUNTIME('setZoom', {
-        zoomFactor: -0.1
-    });
-});
-
-/*
-mapkey('yk', '#8Copy contract information from CRM', function() {
-                             
-    var table_left = document.getElementById('w1').getElementsByTagName('tbody')[0];
-    var table_right = document.getElementById('w2').getElementsByTagName('tbody')[0];
-    var number = document.getElementById('section-title');
-    
-    Clipboard.write(table_right.getElementsByTagName('tr')[0].getElementsByTagName('td')[0].innerHTML + ";" 
-                  + table_right.getElementsByTagName('tr')[1].getElementsByTagName('td')[0].innerHTML + " " 
-                  + table_right.getElementsByTagName('tr')[2].getElementsByTagName('td')[0].innerHTML + ";" 
-                  + number.textContent.replace(/\((.*?)\)|\s/g, "") + ";"
-                  + table_left.getElementsByTagName('tr')[5].getElementsByTagName('td')[0].innerHTML + ";"
-                  + table_right.getElementsByTagName('tr')[10].getElementsByTagName('td')[0].innerHTML.split(",")[0])
 })
-mapkey('yj', '#8Copy contract information from CRM', function() {
-                             
-    var table_left = document.getElementById('w1').getElementsByTagName('tbody')[0];
-    var table_right = document.getElementById('w2').getElementsByTagName('tbody')[0];
-    var number = document.getElementById('section-title');
-    
-    Clipboard.write(table_right.getElementsByTagName('tr')[0].getElementsByTagName('td')[0].innerHTML + ";" 
-                  + table_right.getElementsByTagName('tr')[1].getElementsByTagName('td')[0].innerHTML + " " 
-                  + table_right.getElementsByTagName('tr')[2].getElementsByTagName('td')[0].innerHTML + ";" 
-                  + number.textContent.replace(/\((.*?)\)|\s/g, "") + ";"
-                  + table_left.getElementsByTagName('tr')[5].getElementsByTagName('td')[0].innerHTML + ";"
-                  + table_right.getElementsByTagName('tr')[11].getElementsByTagName('td')[0].innerHTML.split(",")[0])
-})
-
-mapkey('yP', '#8Copy marketer calls information', function() {
-    Hints.create('div[id="call-history-grid"] > table > tbody > tr',  function(call) {
-        let marketer = call.querySelectorAll('td')[3].textContent;
-        let comment = call.querySelectorAll('td')[14].textContent;
-        Clipboard.write(marketer + "-" + comment);
-    })
-})
-mapkey('yS', '#8Copy statistics', function() {
-    const names = ['Гаврилова Мария', 'Филиппова_1L Наталья', 'Филиппова_2L Наталья', 
-                   'Трохименко Людмила_1L', 'Трохименко Людмила_2L', 'Лысенко_1L Карина', 
-                   'Лысенко_2L Карина', 'Бардык Наталия_1L', 'Бардык Наталия_2L', 
-                   'Ковезина', 'Шустрова', 'Федорченко Николай', 
-                   'Третяк_1L Ирина', 'Третяк_2L Ирина', 'Руденко', 'Харьковская'];
-    var statistic = [];
-    names.forEach((name) => {
-        statistic.push({marketer: name, Zgoda: 0, Pozniej: 0, Pomy: 0, Odmowa: 0, exists: false})
-    })
-    
-    document.getElementsByClassName("items table table-striped table-condensed")[0].querySelectorAll('tbody > tr').forEach((call) => {
-        var marketer = call.getElementsByTagName('td')[3].textContent;
-        var result = call.getElementsByTagName('td')[5].textContent;
-        var comment = call.getElementsByTagName('td')[14].textContent;
-        statistic.forEach((marketer_stat, i, arr) => {
-            if (marketer.includes(marketer_stat.marketer)) {
-                Object.keys(marketer_stat).forEach((result_stat) => {
-                    if (result.includes(result_stat)) {
-                        marketer_stat[result_stat]++;
-                        marketer_stat['exists'] = true;
-                    }
-                })
-            }
-        })
-    }); 
-
-    var statistic_table = function() {
-        let table = "";
-        statistic.forEach((marketer_stat) => {
-            let total = marketer_stat['Zgoda'] + marketer_stat['Pomy'] + marketer_stat['Pozniej'] + marketer_stat['Odmowa']
-            if (marketer_stat['exists'] == true) {
-                table += (marketer_stat['marketer'] != 0 ? marketer_stat['marketer'] : 0) + "\t" +
-                         (marketer_stat['Zgoda'] != 0 ? marketer_stat['Zgoda'] : 0) + "\t" +
-                         (marketer_stat['Pomy'] != 0 ? marketer_stat['Pomy'] : 0) + "\t" +
-                         (marketer_stat['Pozniej'] != 0 ? marketer_stat['Pozniej'] : 0) + "\t" +
-                         (marketer_stat['Odmowa'] != 0 ? marketer_stat['Odmowa'] : 0) + "\t" + total + "\n";
-            }
-        })
-        return table;
+mapkey('I', "", () => {
+    if (document.querySelector(".dynamic-checks-div.ng-hide")) {
+        Hints.create("#given-answer-select-dri .ui-select-toggle", Hints.dispatchMouseClick);
+    } else {
+        Hints.create("input.peCommentInput", Hints.dispatchMouseClick);
     }
-
-    Clipboard.write(statistic_table())
-});
-
-mapkey('yaS', '#8Copy statistics', function() {
-    const names = ['Гаврилова Мария', 'Филиппова_1L Наталья', 'Филиппова_2L Наталья', 
-                   'Трохименко Людмила_1L', 'Трохименко Людмила_2L', 'Лысенко_1L Карина', 
-                   'Лысенко_2L Карина', 'Бардык Наталия_1L', 'Бардык Наталия_2L', 
-                   'Ковезина', 'Шустрова', 'Федорченко Николай', 
-                   'Третяк_1L Ирина', 'Третяк_2L Ирина', 'Руденко', 'Харьковская'];
-    var statistic = [];
-
-    Clipboard.read((response) => {
-        clipboard = response.data
-        names.forEach((name) => {
-            var exist = false;
-            clipboard.split('\n').forEach((marketer_hist, i, arr) => {
-                var marketer_hist = marketer_hist.split('\t')
-                if (marketer_hist[0].includes(name)) {
-                    statistic.push({marketer: name, Zgoda: parseInt(marketer_hist[1]), 
-                                    Pozniej: parseInt(marketer_hist[3]), 
-                                    Pomy: parseInt(marketer_hist[2]), 
-                                    Odmowa: parseInt(marketer_hist[4]), 
-                                    exists: true})
-                    exist = true;
-                } else if (i == arr.length - 1 && exist == false) {
-                    statistic.push({marketer: name, Zgoda: 0, Pozniej: 0, Pomy: 0, Odmowa: 0, exists: false})
-                }
-            })
-        })
-    })
-    
-    document.getElementsByClassName("items table table-striped table-condensed")[0].querySelectorAll('tbody > tr').forEach((call) => {
-        var marketer = call.getElementsByTagName('td')[3].textContent;
-        var result = call.getElementsByTagName('td')[5].textContent;
-        var comment = call.getElementsByTagName('td')[14].textContent;
-        statistic.forEach((marketer_stat, i, arr) => {
-            if (marketer.includes(marketer_stat.marketer)) {
-                Object.keys(marketer_stat).forEach((result_stat) => {
-                    if (result.includes(result_stat)) {
-                        marketer_stat[result_stat]++;
-                        marketer_stat['exists'] = true;
-                    }
-                })
-            }
-        })
-    }); 
-
-    var statistic_table = function() {
-        let table = "";
-        statistic.forEach((marketer_stat) => {
-            let total = marketer_stat['Zgoda'] + marketer_stat['Pomy'] + marketer_stat['Pozniej'] + marketer_stat['Odmowa']
-            if (marketer_stat['exists'] == true) {
-                table += (marketer_stat['marketer'] != 0 ? marketer_stat['marketer'] : 0) + "\t" +
-                         (marketer_stat['Zgoda'] != 0 ? marketer_stat['Zgoda'] : 0) + "\t" +
-                         (marketer_stat['Pomy'] != 0 ? marketer_stat['Pomy'] : 0) + "\t" +
-                         (marketer_stat['Pozniej'] != 0 ? marketer_stat['Pozniej'] : 0) + "\t" +
-                         (marketer_stat['Odmowa'] != 0 ? marketer_stat['Odmowa'] : 0) + "\t" + total + "\n";
-            }
-        })
-        return table;
+})
+mapkey('<Enter>', "", () => {
+    if (document.activeElement.className == "btn btn-success") {
+        document.activeElement.click();
+    } else if (document.querySelector(".dynamic-checks-div.ng-hide")) {
+        document.querySelector("button[ng-click*='saveGivenAnswer']").click();
+    } else if (document.querySelector(".modal.in")) {
+        document.querySelector("button[ng-click*='selectReceipt']").click();
+    } else if (document.querySelector(".dynamic-checks-div:not(.ng-hide)")) {
+        document.querySelector("span[ng-click*='choiceReceipt']").click();
     }
-
-    Clipboard.write(statistic_table())
-});
-
-mapkey('Fc', '#8Open all contracts', function() {
-    /*document.getElementsByClassName('table table-hover table-striped table-condensed table-bordered table-small kv-grid-table kv-table-wrap')[0].querySelectorAll('tbody > tr').forEach((contract) => {
-        contracts_url = document.location.host + contract.querySelector('td[data-col-seq="0"] a').getAttribute('href');
-        tabOpenLink(contracts_url);
-    })
-    document.getElementsByClassName('v-datatable v-table theme--light')[0].querySelectorAll('tbody > tr').forEach((contract) => {
-        contracts_url = contract.querySelector('span a').getAttribute('href');
-        tabOpenLink(contracts_url);
-    })
 })
-
-mapkey('yT', '#8Total contracts', function() {
-    let calls = []
-    document.getElementsByClassName('items table table-striped table-condensed')[0].querySelectorAll('tbody > tr').forEach((call) => {
-        calls.push(call.querySelectorAll('td')[7].textContent)
-    })
-    Clipboard.write([...new Set(calls)].length)
+mapkey("<Esc>", "", () => {
+    if (document.activeElement.className == "btn btn-success") {
+        document.activeElement.blur();
+    } else if (document.querySelector(".modal.in")) {
+        document.querySelector("button.close").click();
+    }
 })
-mapkey('yaT', '#8Add total contracts', function() {
-    var calls = []
-    var total;
-    document.getElementsByClassName('items table table-striped table-condensed')[0].querySelectorAll('tbody > tr').forEach((call) => {
-        calls.push(call.querySelectorAll('td')[7].textContent)
-    })
-    Clipboard.read((response) => {
-        total = parseInt(response.data) + [...new Set(calls)].length
-    })
-    Clipboard.write(total)
+mapkey('h', "", () => {
+    if (document.querySelector(".modal.in")) {
+        document.querySelector(".modal button[ng-click*='prev']").click();
+    }
 })
-*/
-map('J', 'd');
-map('K', 'e');
-
+mapkey('l', "", () => {
+    if (document.querySelector(".modal.in")) {
+        document.querySelector(".modal button[ng-click*='next']").click();
+    }
+})
+mapkey('dd', "", () => {
+    document.querySelector("button[ng-click*='deleteChildPe']").click();
+})
+mapkey('dh', "", () => {
+    if (document.querySelector(".dynamic-checks-div:not(.ng-hide)")) {
+        document.querySelector("button[ng-click*='editChildPe']").click();
+    }
+    document.querySelector("button[ng-click*='setMarkIn']").click();
+    if (document.querySelector(".dynamic-checks-div:not(.ng-hide)")) {
+        document.querySelector("button[ng-click*='saveChildPe']").click();
+    }
+})
+mapkey('dl', "", () => {
+    if (document.querySelector(".dynamic-checks-div:not(.ng-hide)")) {
+        document.querySelector("button[ng-click*='editChildPe']").click();
+    }
+    document.querySelector("button[ng-click*='setMarkOut']").click();
+    if (document.querySelector(".dynamic-checks-div:not(.ng-hide)")) {
+        document.querySelector("button[ng-click*='saveChildPe']").click();
+    }
+})
+mapkey('qe', "", () => {
+    Hints.create("button[ng-click*='editGivenAnswer']", Hints.dispatchMouseClick);
+})
+mapkey('qd', "", () => {
+    Hints.create("button[ng-click*='deleteGivenAnswer']", Hints.dispatchMouseClick);
+})
