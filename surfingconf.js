@@ -4,6 +4,7 @@ settings.showModeStatus = true;
 settings.scrollStepSize = 200;
 settings.focusOnSaved = false;
 
+unmap('<Ctrl-h'>)
 unmap('h');
 unmap('l');
 unmap('f');
