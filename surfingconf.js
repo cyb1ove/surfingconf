@@ -13,6 +13,8 @@ unmap('i');
 unmap('I');
 unmap('d');
 unmap('q');
+unmap('s');
+unmap('x');
 
 mapkey('<Space>', '', () => {
     document.querySelector("button[ng-click*='togglePlay']").click();
@@ -44,6 +46,9 @@ mapkey('<Alt-o>', '', () => {
 mapkey('<Alt-p>', '', () => {
     document.querySelector("button[ng-click='speedPlay(6, $event)']").click();
 })
+mapkey('<Alt-j>', "", () => {
+    document.querySelector("button[ng-click*='playMediaDetail']").click();
+})
 
 mapkey('a', '', () => {
     document.querySelector("button[ng-click*='addDynamicPeToTask']").click();
@@ -62,7 +67,9 @@ mapkey('u', "", () => {
     })
 })
 mapkey('i', "", () => {
-    if (document.querySelector(".dynamic-checks-div.ng-hide")) {
+    if (document.querySelector(".select-dri:not(.ng-hide)")) {
+        document.querySelector(".select-dri:not(.ng-hide) input[type='search']").focus();
+    } else if (document.querySelector(".dynamic-checks-div.ng-hide")) {
         Hints.create("#answer-details-editor textarea", Hints.dispatchMouseClick);
     } else {
         Hints.create("input[ng-click*='setChildAnswer']", 
@@ -76,6 +83,37 @@ mapkey('I', "", () => {
         Hints.create("input.peCommentInput", Hints.dispatchMouseClick);
     }
 })
+mapkey('di', "", () => {     
+    Hints.create("input[ng-click*='setChildAnswer']", (el) => {         
+        let parent = el.parentNode.parentNode.parentNode;         
+        el.click();         
+        if (parent.querySelector("span[ng-click*='editDynamicDri']")) {             
+            parent.querySelector("span[ng-click*='editDynamicDri']").click();         
+            
+        } else {             
+            parent.querySelector("button[ng-click*='getDynamicDriList']").click();         
+            
+        }         
+        parent.querySelector(".ui-select-match-text").click();
+        new MutationObserver(function(mutations) {
+            if (parent.querySelector('.select-dri:not(.ng-hide) input[type="search"]')) {
+                alert('fd');
+                parent.querySelector('.select-dri:not(.ng-hide) input[type="search"]').focus();
+            }
+            this.disconnect();
+        }).observe(document, {childList: true, subtree: true});
+    })
+})
+mapkey('x', "", () => {
+    if (document.querySelector(".dynamic-checks-div.ng-hide")) {
+        document.querySelector("button[ng-click*='removeSelectedDri']").click();
+    } else {
+        Hints.create("span[ng-click*='removeDynamicDri']", Hints.dispatchMouseClick, {multipleHits: true});
+    }
+})
+/*mapkey('s', "", () => {
+    document.querySelector(".select-dri:not(.ng-hide) input[type='search']").focus();
+})*/
 mapkey('<Enter>', "", () => {
     if (document.activeElement.className == "btn btn-success") {
         document.activeElement.click();
@@ -97,11 +135,15 @@ mapkey("<Esc>", "", () => {
 mapkey('h', "", () => {
     if (document.querySelector(".modal.in")) {
         document.querySelector(".modal button[ng-click*='prev']").click();
+    } else {
+        Hints.create("#secondary-content", Hints.dispatchMouseClick);
     }
 })
 mapkey('l', "", () => {
     if (document.querySelector(".modal.in")) {
         document.querySelector(".modal button[ng-click*='next']").click();
+    } else {
+        Hints.create("#primary-content", Hints.dispatchMouseClick);
     }
 })
 mapkey('dd', "", () => {
