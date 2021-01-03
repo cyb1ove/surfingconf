@@ -95,13 +95,13 @@ mapkey('di', "", () => {
             
         }         
         parent.querySelector(".ui-select-match-text").click();
-        new MutationObserver(function(mutations) {
+        /*new MutationObserver(function(mutations) {
             if (parent.querySelector('.select-dri:not(.ng-hide) input[type="search"]')) {
                 alert('fd');
                 parent.querySelector('.select-dri:not(.ng-hide) input[type="search"]').focus();
             }
             this.disconnect();
-        }).observe(document, {childList: true, subtree: true});
+        }).observe(document, {childList: true, subtree: true});*/
     })
 })
 mapkey('x', "", () => {
@@ -111,9 +111,6 @@ mapkey('x', "", () => {
         Hints.create("span[ng-click*='removeDynamicDri']", Hints.dispatchMouseClick, {multipleHits: true});
     }
 })
-/*mapkey('s', "", () => {
-    document.querySelector(".select-dri:not(.ng-hide) input[type='search']").focus();
-})*/
 mapkey('<Enter>', "", () => {
     if (document.activeElement.className == "btn btn-success") {
         document.activeElement.click();
@@ -126,7 +123,13 @@ mapkey('<Enter>', "", () => {
     }
 })
 mapkey("<Esc>", "", () => {
-    if (document.activeElement.className == "btn btn-success") {
+    if (document.querySelectorAll("div[class*='video-container']:not([style*='display: none'])").length == 1) {
+        Hints.create("video", (el) => {
+            let clickEvent = document.createEvent('MouseEvents');
+            clickEvent.initEvent('dblclick', false, false);
+            el.dispatchEvent(clickEvent);
+        })
+    } else if (document.activeElement.className == "btn btn-success") {
         document.activeElement.blur();
     } else if (document.querySelector(".modal.in")) {
         document.querySelector("button.close").click();
