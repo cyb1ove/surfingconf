@@ -170,9 +170,84 @@ mapkey('dl', "", () => {
         document.querySelector("button[ng-click*='saveChildPe']").click();
     }
 })
-mapkey('qe', "", () => {
+mapkey('di', "", () => {
+    document.querySelector("#require-attention-dpe").click();
+})
+mapkey('qkg', "Garbage question, yes", () => {
+    document.querySelector("[id = '5e43f15cf1dc204b07120e2c']").click();
+})
+mapkey('qjg', "Garbage question, no", () => {
+    document.querySelector("[id = '5e43f15cf1dc204b07120e2d']").click();
+})
+mapkey('qki', "Ignore question, yes", () => {
+    document.querySelector("[id = '5e44196df1dc204b071226ac']").click();
+})
+mapkey('qji', "Ignore question, no", () => {
+    document.querySelector("[id = '5e44196df1dc204b071226ad']").click();
+})
+mapkey('qkq', "Queue question, yes", () => {
+    document.querySelector("[id = '5e49abd0aa03e75010937b35']").click();
+})
+mapkey('qjq', "Queue question, no", () => {
+    document.querySelector("[id = '5e49abd1aa03e75010937b36']").click();
+})
+mapkey('qkm', "Music question, yes", () => {
+    document.querySelector("[id = '5e49af18aa03e75010937e21']").click();
+})
+mapkey('qjm', "Music question, no", () => {
+    document.querySelector("[id = '5e49af18aa03e75010937e22']").click();
+})
+mapkey('qku', "Uniform question, yes", () => {
+    document.querySelector("[id = '5e49b080aa03e75010937fa8']").click();
+})
+mapkey('qju', "Uniform question, no", () => {
+    document.querySelector("[id = '5e49af18aa03e75010937e22']").click();
+})
+mapkey('qka', "Absent question, yes", () => {
+    document.querySelector("[id = '5e49ab22aa03e75010937aaa']").click();
+})
+mapkey('qja', "Absent question, no", () => {
+    document.querySelector("[id = '5e49ab22aa03e75010937aab']").click();
+})
+mapkey('qkc', "Count money question, yes", () => {
+    document.querySelector("[id = '5e49af85aa03e75010937e91']").click();
+})
+mapkey('qjc', "Count money question, no", () => {
+    document.querySelector("[id = '5e49af85aa03e75010937e92']").click();
+})
+mapkey('qke', "Employee question, yes", () => {
+    document.querySelector("[id = '5e49b00faa03e75010937f5a']").click();
+})
+mapkey('qje', "Employee question, no", () => {
+    document.querySelector("[id = '5e49b00faa03e75010937f5c']").click();
+})
+mapkey('qkt', "Transfer money question, yes", () => {
+    document.querySelector("[id = '5e49b053aa03e75010937f82']").click();
+})
+mapkey('qjt', "Transfer money question, no", () => {
+    document.querySelector("[id = '5e49b054aa03e75010937f83']").click();
+})
+mapkey('qkl', "Leave question, yes", () => {
+    document.querySelector("[id = '5e49b116aa03e750109380c5']").click();
+})
+mapkey('qjl', "Leave question, no", () => {
+    document.querySelector("[id = '5e49b116aa03e750109380c6']").click();
+})
+mapkey('qks', "Seat question, yes", () => {
+    document.querySelector("[id = '5e64e18385f4600d8924f3d8']").click();
+})
+mapkey('qjs', "Seat question, no", () => {
+    document.querySelector("[id = '5e64e18385f4600d8924f3d9']").click();
+})
+mapkey('qkn', "Medical mask question, yes", () => {
+    document.querySelector("[id = '5f7722ec09b08f13317a058f']").click();
+})
+mapkey('qjn', "Medical mask question, no", () => {
+    document.querySelector("[id = '5f7722ec09b08f13317a0590']").click();
+})
+mapkey('se', "", () => {
     Hints.create("button[ng-click*='editGivenAnswer']", Hints.dispatchMouseClick);
 })
-mapkey('qd', "", () => {
+mapkey('sd', "", () => {
     Hints.create("button[ng-click*='deleteGivenAnswer']", Hints.dispatchMouseClick);
 })
