@@ -15,6 +15,10 @@ unmap('d');
 unmap('q');
 unmap('s');
 unmap('x');
+unmap('X');
+unmap('p');
+unmap('m');
+unmap('e');
 
 mapkey('<Space>', '', () => {
     document.querySelector("button[ng-click*='togglePlay']").click();
@@ -56,7 +60,7 @@ mapkey('a', '', () => {
 mapkey('f', '', () => {
     Hints.create("tbody[ng-click*='openDynamicCheck']", Hints.dispatchMouseClick, {mouseEvents: ["click"]});
 })
-mapkey('m', '', () => {
+mapkey('r', '', () => {
     Hints.create("#mics-switcher a", Hints.dispatchMouseClick);
 })
 mapkey('u', "", () => {
@@ -66,19 +70,24 @@ mapkey('u', "", () => {
         el.dispatchEvent(clickEvent);
     })
 })
+mapkey('e', "", () => {
+    Hints.create("[ng-click*='editGivenAnswer(givenAnswer)']", Hints.dispatchMouseClick);
+})
+mapkey('s', "", () => {
+    document.querySelector("[ng-click*='toggleSlimPanel($event)']").click();
+})
 mapkey('i', "", () => {
     if (document.querySelector(".select-dri:not(.ng-hide)")) {
         document.querySelector(".select-dri:not(.ng-hide) input[type='search']").focus();
     } else if (document.querySelector(".dynamic-checks-div.ng-hide")) {
-        Hints.create("#answer-details-editor textarea", Hints.dispatchMouseClick);
+        Hints.create("#given-answer-select-dri .ui-select-toggle", Hints.dispatchMouseClick);
     } else {
-        Hints.create("input[ng-click*='setChildAnswer']", 
-                  Hints.dispatchMouseClick, {multipleHits: true});
+        Hints.create("[ng-click*='setChildAnswer']", Hints.dispatchMouseClick, {multipleHits: true})
     }
 })
 mapkey('I', "", () => {
     if (document.querySelector(".dynamic-checks-div.ng-hide")) {
-        Hints.create("#given-answer-select-dri .ui-select-toggle", Hints.dispatchMouseClick);
+        Hints.create("#answer-details-editor textarea", Hints.dispatchMouseClick);
     } else {
         Hints.create("input.peCommentInput", Hints.dispatchMouseClick);
     }
@@ -95,20 +104,22 @@ mapkey('di', "", () => {
             
         }         
         parent.querySelector(".ui-select-match-text").click();
-        /*new MutationObserver(function(mutations) {
-            if (parent.querySelector('.select-dri:not(.ng-hide) input[type="search"]')) {
-                alert('fd');
-                parent.querySelector('.select-dri:not(.ng-hide) input[type="search"]').focus();
-            }
-            this.disconnect();
-        }).observe(document, {childList: true, subtree: true});*/
     })
+})
+mapkey('pi', "", () => {
+    Front.showEditor(document.querySelector("#peSelect"))
+})
+mapkey('mi', "", () => {
+    document.querySelector("#require-attention-dpe").click();
+})
+mapkey('mI', "", () => {
+    document.querySelector("#managerAttention").click();
 })
 mapkey('x', "", () => {
     if (document.querySelector(".dynamic-checks-div.ng-hide")) {
         document.querySelector("button[ng-click*='removeSelectedDri']").click();
     } else {
-        Hints.create("span[ng-click*='removeDynamicDri']", Hints.dispatchMouseClick, {multipleHits: true});
+        Hints.create("[ng-click*='removeDynamicDri'], [ng-click*='deleteGivenAnswer(givenAnswer)']", Hints.dispatchMouseClick, {multipleHits: true});
     }
 })
 mapkey('<Enter>', "", () => {
@@ -170,9 +181,7 @@ mapkey('dl', "", () => {
         document.querySelector("button[ng-click*='saveChildPe']").click();
     }
 })
-mapkey('di', "", () => {
-    document.querySelector("#require-attention-dpe").click();
-})
+
 mapkey('qkg', "Garbage question, yes", () => {
     document.querySelector("[id = '5e43f15cf1dc204b07120e2c']").click();
 })
@@ -201,7 +210,7 @@ mapkey('qku', "Uniform question, yes", () => {
     document.querySelector("[id = '5e49b080aa03e75010937fa8']").click();
 })
 mapkey('qju', "Uniform question, no", () => {
-    document.querySelector("[id = '5e49af18aa03e75010937e22']").click();
+    document.querySelector("[id = '5e49b080aa03e75010937fa9']").click();
 })
 mapkey('qka', "Absent question, yes", () => {
     document.querySelector("[id = '5e49ab22aa03e75010937aaa']").click();
@@ -244,10 +253,4 @@ mapkey('qkn', "Medical mask question, yes", () => {
 })
 mapkey('qjn', "Medical mask question, no", () => {
     document.querySelector("[id = '5f7722ec09b08f13317a0590']").click();
-})
-mapkey('se', "", () => {
-    Hints.create("button[ng-click*='editGivenAnswer']", Hints.dispatchMouseClick);
-})
-mapkey('sd', "", () => {
-    Hints.create("button[ng-click*='deleteGivenAnswer']", Hints.dispatchMouseClick);
 })
