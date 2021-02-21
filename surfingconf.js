@@ -72,65 +72,65 @@ let comment = {
 
 mapkey('<Space>', '', () => {
     document.querySelector("button[ng-click*='togglePlay']").click();
-})
+});
 mapkey('<Alt-h>', '', () => {
     document.querySelector("button[ng-click*='backward(5)']").click();
-})
+});
 mapkey('<Alt-l>', '', () => {
     document.querySelector("button[ng-click*='forward(5)']").click();
-})
+});
 mapkey('<Alt-H>', '', () => {
     document.querySelector("button[ng-click*='backward(30)']").click();
-})
+});
 mapkey('<Alt-L>', '', () => {
     document.querySelector("button[ng-click*='forward(30)']").click();
-})
+});
 mapkey('<Alt-y>', '', () => {
     document.querySelector("button[ng-click='speedPlay(1)']").click();
-})
+});
 mapkey('<Alt-u>', '', () => {
     document.querySelector("button[ng-click='speedPlay(1.5, $event)']").click();
-})
+});
 mapkey('<Alt-i>', '', () => {
     document.querySelector("button[ng-click='speedPlay(2, $event)']").click();
-})
+});
 mapkey('<Alt-o>', '', () => {
     document.querySelector("button[ng-click='speedPlay(4, $event)']").click();
-})
+});
 mapkey('<Alt-p>', '', () => {
     document.querySelector("button[ng-click='speedPlay(6, $event)']").click();
-})
+});
 mapkey('<Alt-j>', "", () => {
     document.querySelector("button[ng-click*='playMediaDetail']").click();
-})
+});
 
 mapkey('a', '', () => {
     document.querySelector("button[ng-click*='addDynamicPeToTask']").click();
-})
+});
 mapkey('f', '', () => {
     Hints.create("tbody[ng-click*='openDynamicCheck']", Hints.dispatchMouseClick, {mouseEvents: ["click"]});
-})
+});
 mapkey('r', '', () => {
     Hints.create("#mics-switcher a", Hints.dispatchMouseClick);
-})
+});
 mapkey('u', "", () => {
     Hints.create("video", (el) => {
         let clickEvent = document.createEvent('MouseEvents');
         clickEvent.initEvent('dblclick', false, false);
         el.dispatchEvent(clickEvent);
     })
-})
+});
 mapkey('e', "", () => {
     Hints.create("[ng-click*='editGivenAnswer(givenAnswer)']", Hints.dispatchMouseClick);
-})
+});
 mapkey('s', "", () => {
     document.querySelector("[ng-click*='toggleSlimPanel($event)']").click();
-})
+});
 mapkey('c', "", () => {
     Hints.create(".video-container", (el) => {
         el.style.display = "none";
-    })
-})
+    });
+});
 mapkey('i', "", () => {
     if (document.querySelector(".select-dri:not(.ng-hide)")) {
         Hints.create(".select-dri:not(.ng-hide) input[type='search']", Hints.dispatchMouseClick);
@@ -143,24 +143,24 @@ mapkey('i', "", () => {
             let question = qs_row.querySelector("span.ng-binding").textContent.replace(/\n/g, " ");
 
             checkbox.click();
-            
+
             let mutation = new MutationObserver((mutations, observer) => {
                 console.log(mutations);
                 if(qs_row.querySelector("[ng-click*='getDynamicDriList']")) {
                     if (checkbox_div.querySelector("label").textContent == "Нет") {
                         let angular_trigger = new Event("input");
                         let comment_box = qs_row.querySelector("textarea");
-                        
+
                         comment_box.value = (comment[question] || null);
                         comment_box.dispatchEvent(angular_trigger)
-                        
+
                         observer.disconnect();
                     }
                 }
             });
-        
+
             mutation.observe(qs_row, {childList: true, subtree: true, attributes: true})
-            
+
         }, {multipleHits: true})
     }
 })
@@ -171,35 +171,35 @@ mapkey('I', "", () => {
         Hints.create("input.peCommentInput", Hints.dispatchMouseClick);
     }
 })
-mapkey('di', "", () => {     
-    Hints.create("input[ng-click*='setChildAnswer']:not([checked])", (checkbox) => {         
+mapkey('di', "", () => {
+    Hints.create("input[ng-click*='setChildAnswer']:not([checked])", (checkbox) => {
         let qs_row = checkbox.parentNode.parentNode.parentNode;
         let question = qs_row.querySelector("span.ng-binding").textContent.replace(/\n/g, " ");
         let checkbox_div = checkbox.parentNode;
-        
+
         checkbox.click();
-                
-        if (qs_row.querySelector("span[ng-click*='editDynamicDri']")) {             
-            qs_row.querySelector("span[ng-click*='editDynamicDri']").click();         
-        } else {             
-            qs_row.querySelector("button[ng-click*='getDynamicDriList']").click();         
-        }         
+
+        if (qs_row.querySelector("span[ng-click*='editDynamicDri']")) {
+            qs_row.querySelector("span[ng-click*='editDynamicDri']").click();
+        } else {
+            qs_row.querySelector("button[ng-click*='getDynamicDriList']").click();
+        }
         qs_row.querySelector(".ui-select-match-text").click();
-        
+
         let mutation = new MutationObserver((mutations, observer) => {
             if(qs_row.querySelector(".dri-name")) {
                     if (checkbox_div.querySelector("label").textContent == "Нет") {
                         let angular_trigger = new Event("input");
                         let comment_box = qs_row.querySelector("textarea");
-                        
+
                         comment_box.value = (comment[question] || null);
                         comment_box.dispatchEvent(angular_trigger);
-                        
+
                         observer.disconnect();
                     }
             }
         });
-        
+
         mutation.observe(qs_row, {childList: true, subtree: true, attributes: true})
 
     })
@@ -223,22 +223,22 @@ mapkey('mi', "", () => {
 mapkey('mI', "", () => {
     document.querySelector("#managerAttention").click();
 })
-mapkey('x', "", () => {
-    if (!document.querySelector("#answer-details-editor")) {
-        Hints.create("[ng-click*='deleteGivenAnswer(givenAnswer)'], [ng-click*='removeDynamicDri']", Hints.dispatchMouseClick, {multipleHits: true});
-    } else {
-        document.querySelector("button[ng-click*='removeSelectedDri']").click();
-    }
-})
 mapkey('X', "", () => {
-    document.querySelector("[ng-click*='removeReceipt']").click();
+  Hints.create("input[ng-click*='setChildAnswer'][checked]")
+})
+mapkey('x', "", () => {
+  if (!document.querySelector("#answer-details-editor")) {
+      Hints.create("[ng-click*='deleteGivenAnswer(givenAnswer)'], [ng-click*='removeDynamicDri']", Hints.dispatchMouseClick, {multipleHits: true});
+  } else {
+      document.querySelector("button[ng-click*='removeSelectedDri']").click();
+  }
 })
 mapkey('<Enter>', "", () => {
     if (document.activeElement.className == "btn btn-success") {
         document.activeElement.click();
     } else if (document.querySelector(".dynamic-checks-div.ng-hide")) {
         document.querySelector("button[ng-click*='saveGivenAnswer']").click();
-        
+
         let answers = document.querySelector(".scrollable");
         let question = document.querySelector("#answer-details-editor tbody td").textContent;
         let mutation = new MutationObserver((mutation, observer) => {
@@ -246,14 +246,14 @@ mapkey('<Enter>', "", () => {
                 if(rec['type'] == "childList" && rec['addedNodes'][0] != undefined) {
                     let answer_tbody = rec['addedNodes'][0];
                     let answer_td = answer_tbody.querySelector("[ng-class*='givenAnswer.colorClass']");
-                    if(answer_td.textContent == question && answer_td.classList.contains("red") 
-                       && answer_tbody.querySelector('input').classList.contains('ng-empty')) 
+                    if(answer_td.textContent == question && answer_td.classList.contains("red")
+                       && answer_tbody.querySelector('input').classList.contains('ng-empty'))
                         answer_tbody.querySelector('input').click();
                         observer.disconnect();
                 }
             })
         })
-        
+
         mutation.observe(answers, {childList: true, subtree: true, attributes: true})
     } else if (document.querySelector(".modal.in")) {
         document.querySelector("button[ng-click*='selectReceipt']").click();
@@ -261,8 +261,13 @@ mapkey('<Enter>', "", () => {
         document.querySelector("span[ng-click*='choiceReceipt']").click();
     }
 })
+mapkey('<Shift-Enter>', "", () => {
+    document.querySelector("[ng-click*='removeReceipt']").click();
+})
 mapkey("<Esc>", "", () => {
-    if (document.querySelectorAll("div[class*='video-container']:not([style*='display: none'])").length == 1) {
+    if (document.querySelector(".modal.in")) {
+        document.querySelector("button.close").click();
+    } else if (document.querySelectorAll("div[class*='video-container']:not([style*='display: none'])").length == 1) {
         Hints.create("video", (el) => {
             let clickEvent = document.createEvent('MouseEvents');
             clickEvent.initEvent('dblclick', false, false);
@@ -270,8 +275,6 @@ mapkey("<Esc>", "", () => {
         })
     } else if (document.activeElement.className == "btn btn-success") {
         document.activeElement.blur();
-    } else if (document.querySelector(".modal.in")) {
-        document.querySelector("button.close").click();
     }
 })
 mapkey('h', "", () => {
@@ -353,7 +356,7 @@ mapkey('qjm', "Music question, no", () => {
 })
 
 mapkey('qku', "Uniform question, yes", () => {
-    if (document.querySelector("[id = '5e49b080aa03e75010937fa8']")) { 
+    if (document.querySelector("[id = '5e49b080aa03e75010937fa8']")) {
         document.querySelector("[id = '5e49b080aa03e75010937fa8']").click();
     } else if (document.querySelector("[id = '5fdb0daf943a1e516fdbfe64']")) {
         document.querySelector("[id = '5fdb0daf943a1e516fdbfe64']").click();
@@ -364,7 +367,7 @@ mapkey('qku', "Uniform question, yes", () => {
     }
 })
 mapkey('qju', "Uniform question, no", () => {
-    if (document.querySelector("[id = '5e49b080aa03e75010937fa9']")) { 
+    if (document.querySelector("[id = '5e49b080aa03e75010937fa9']")) {
         document.querySelector("[id = '5e49b080aa03e75010937fa9']").click();
     } else if (document.querySelector("[id = '5fdb0daf943a1e516fdbfe65']")) {
         document.querySelector("[id = '5fdb0daf943a1e516fdbfe65']").click();
@@ -523,4 +526,3 @@ mapkey('yt', "Copy current time", () => {
     let parts = unformat_time.split(':');
     Clipboard.write(`${parts[1]} мин ${parts[2]} сек`)
 })
-
