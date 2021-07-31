@@ -6,3 +6,4 @@ settings.focusOnSaved = false;
 settings.startToShowEmoji = 0;
 
 unmap('<Ctrl-h>');
+unmap('<Ctrl-j>');
