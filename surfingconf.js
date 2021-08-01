@@ -7,3 +7,8 @@ settings.startToShowEmoji = 0;
 
 unmap('<Ctrl-h>');
 unmap('<Ctrl-j>');
+unmap('f');
+
+mapkey('f', '', function() {
+    Hints.create("", Hints.dispatchMouseClick, {tabbed: false});
+});
