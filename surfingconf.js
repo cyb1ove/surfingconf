@@ -72,7 +72,7 @@ mapkey('yc', '#7Copy code', () => {
         const partsOfCode = element.innerText.split('$ ');
         Clipboard.write(partsOfCode[partsOfCode.length - 1]);
     })
-})jj
+})
 
 mapkey('yp', '#7Copy paragraph', () => {
     Hitns.create("p", (element) => {
