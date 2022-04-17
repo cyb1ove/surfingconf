@@ -51,6 +51,10 @@ if (document.location.href === 'https://www.google.com/') {
     });
 }
 
+document.addEventListener('onkeydown', (event) => {
+    console.log(event);
+})
+
 mapkey("`", '#10Jump to vim-like mark', function(mark) {
     Normal.jumpVIMark(mark);
 });
