@@ -45,6 +45,8 @@ unmap('aj');
 // unmap("<Space>");
 unmap('<Alt-r>');
 
+map('x', '<Alt-c>');
+
 if (document.location.href === 'https://www.google.com/') {
     document.addEventListener("DOMContentLoaded", function(event) {
          Hints.create("[type=text]", Hints.dispatchMouseClick);
