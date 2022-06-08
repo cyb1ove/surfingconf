@@ -44,7 +44,6 @@ unmap('a');
 unmap('aj');
 // unmap("<Space>");
 unmap('<Alt-r>');
-unmap('x');
 
 if (document.location.href === 'https://www.google.com/') {
     document.addEventListener("DOMContentLoaded", function(event) {
