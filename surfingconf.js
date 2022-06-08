@@ -1,4 +1,4 @@
-const TST_ID = "treestyletab@piro.sakura.ne.jp";
+aconst TST_ID = "treestyletab@piro.sakura.ne.jp";
 const activeTabSelector = "ul [class*=Active], ul [class*=active], ul [class*=selected], ul [class*=Selected]";
 const {
     aceVimMap,
@@ -44,8 +44,7 @@ unmap('a');
 unmap('aj');
 // unmap("<Space>");
 unmap('<Alt-r>');
-
-map('x', '<Alt-c>');
+unmap('x');
 
 if (document.location.href === 'https://www.google.com/') {
     document.addEventListener("DOMContentLoaded", function(event) {
