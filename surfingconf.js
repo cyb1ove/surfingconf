@@ -1,4 +1,4 @@
-aconst TST_ID = "treestyletab@piro.sakura.ne.jp";
+const TST_ID = "treestyletab@piro.sakura.ne.jp";
 const activeTabSelector = "ul [class*=Active], ul [class*=active], ul [class*=selected], ul [class*=Selected]";
 const {
     aceVimMap,
