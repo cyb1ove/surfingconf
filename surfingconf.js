@@ -27,6 +27,7 @@ const {
 Hints.numericHints = true;
 
 settings.stealFocusOnLoad = true;
+settings.enableAutoFocus = false;
 settings.omnibarPosition = "middle";
 settings.scrollStepSize = 140;
 settings.hintAlign = "left";
