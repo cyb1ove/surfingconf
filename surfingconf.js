@@ -43,6 +43,7 @@ unmap('on');
 unmap('<Alt-n>');
 unmap('<Alt-k>');
 unmap('<Alt-j>');
+unmap('<Alt-w>');
 unmap('t');
 unmap('a');
 unmap('aj');
@@ -56,14 +57,13 @@ if (document.location.href === 'https://www.google.com/') {
     });
 }
 
-document.addEventListener('onkeydown', (event) => {
-    console.log(event);
-})
-
 mapkey("<Alt-w>", "Move current tab to another window", function () {
   Front.openOmnibar({ type: "Windows" });
 });
 
+mapkey("<Alt-q>", "Close current tab", function () {
+    RUNTIME("closeTab");
+});
 
 mapkey("`", '#10Jump to vim-like mark', function(mark) {
     Normal.jumpVIMark(mark);
