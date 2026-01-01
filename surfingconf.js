@@ -29,7 +29,7 @@ Hints.numericHints = true;
 settings.stealFocusOnLoad = true;
 settings.enableAutoFocus = false;
 settings.omnibarPosition = "middle";
-settings.scrollStepSize = 140;
+settings.scrollStepSize = 100;
 settings.hintAlign = "left";
 settings.prevLinkRegex = /((<<|prev(ious)?|Prev(ious)?)|<|‹|«|←|前へ|前のページ+)/i;
 settings.nextLinkRegex = /((>>|next|Next)|>|›|»|→|次へ|次のページ+)/i;
@@ -79,6 +79,14 @@ mapkey('hj', '', () => {
 
 mapkey('hk', '', () => {
     history.go(1);
+});
+
+mapkey("qt", "#8Open RecentlyClosed", () => {
+  Front.openOmnibar({ type: "RecentlyClosed" });
+});
+
+mapkey("ht", "#8Open History", () => {
+  Front.openOmnibar({ type: "History" });
 });
 
 mapkey('yc', '#7Copy code', () => {
@@ -162,40 +170,6 @@ mapkey("<Alt-x>", "", async () => {
       type: 'outdent',
       tab:  'current' // required, tabs.Tab.id or alias
     });
-})
-
-mapkey("yp", "Export puzzle dictionary to anki", () => {
-    let dataForExport;
-    const wordCards = document.querySelectorAll(".puzzle-card");
-    
-    wordCards.forEach((element) => {
-        const word = element.querySelector(".puzzle-card__eng-word-current").innerText;
-        const translate = element.querySelector(".puzzle-card__rus-word").innerText;
-        // const americanTranscription = element.querySelector(".american_transcription")?.innerText;
-        // const britishTranscription = element.querySelector(".british_transcription")?.innerText;
-        // console.log(americanTranscription, britishTranscription);
-        const videoExample = [];
-        
-        // const nextVideoArrow = element.querySelector(".wordVideoNext");
-        // console.log(nextVideoArrow)
-        
-        // do {
-        //     const engExample = element.querySelector(".puzzle-card__content-eng").innerText;
-        //     const rusExample = element.querySelector(".puzzle-card__content-rus").innerText;
-        //     nextVideoArrow.click();
-        //     nextVideoArrow = element.querySelector(".wordVideoNext");
-        // } while (nextVideoArrow)
-        const timer = setInterval(() => {
-            const example = {};
-            example.eng = element.querySelector(".puzzle-card__content-eng").innerText;
-            example.rus = element.querySelector(".puzzle-card__content-rus").innerText;
-            videoExample.push(example);
-            
-            const nextVideoArrow = element.querySelector(".wordVideoNext");
-            nextVideoArrow.click();
-            if (!nextVideoArrow) clearInterval(timer);
-        }, 2000)
-    })
 })
 
 // mapkey("<Space>j", "", () => {
