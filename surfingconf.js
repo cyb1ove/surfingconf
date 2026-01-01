@@ -50,6 +50,7 @@ unmap('aj');
 // unmap("<Space>");
 unmap('<Alt-r>');
 unmap('<Alt-w>');
+unmap('q');
 
 if (document.location.href === 'https://www.google.com/') {
     document.addEventListener("DOMContentLoaded", function(event) {
